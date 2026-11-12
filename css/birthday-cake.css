@@ -1,0 +1,1157 @@
+/* ==========================================================================
+   SATHYA'S BIRTHDAY WEBSITE - SECTION 05: INTERACTIVE BIRTHDAY CAKE
+   Style: Cute Romantic Vintage Scrapbook Collage
+   Class Prefix: birthday-cake-
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS Custom Properties / Design Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  --birthday-cake-crimson: #8b0d11;
+  --birthday-cake-crimson-dark: #66080b;
+  --birthday-cake-cream: #fcf8f0;
+  --birthday-cake-parchment: #fbf5e7;
+  --birthday-cake-parchment-border: #e2d2bb;
+  --birthday-cake-ink: #531215;
+  --birthday-cake-ink-soft: #70262a;
+  --birthday-cake-gold: #ffd770;
+  --birthday-cake-gold-glow: rgba(255, 215, 112, 0.45);
+  --birthday-cake-flame-core: #ffffff;
+  --birthday-cake-flame-mid: #ffd447;
+  --birthday-cake-flame-outer: #f39c12;
+  --birthday-cake-tape: #ece3cf;
+  --birthday-cake-tape-shadow: rgba(45, 15, 10, 0.15);
+
+  --birthday-cake-font-hand: 'Caveat', cursive;
+  --birthday-cake-font-display: 'Playfair Display', serif;
+  --birthday-cake-font-serif: 'Cormorant Garamond', Georgia, serif;
+  --birthday-cake-font-ui: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  --birthday-cake-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --birthday-cake-ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Global Background (Exact approved Section 01 background)
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body.birthday-cake-body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: var(--birthday-cake-font-ui);
+  background-color: var(--birthday-cake-crimson);
+  /* Approved original desktop background */
+  background-image: url('../assets/scrapbook-background.webp');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--birthday-cake-ink);
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile Background Switching (Approved original Section 01 mobile background) */
+@media (max-width: 768px) {
+  body.birthday-cake-body {
+    background-image: url('../assets/scrapbook-background-mobile.webp');
+    background-attachment: scroll;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Fixed Top-Left Background Music Player (Seamless across all sections)
+   -------------------------------------------------------------------------- */
+.birthday-cake-music-player {
+  position: fixed;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  pointer-events: auto;
+}
+
+.birthday-cake-music-btn {
+  appearance: none;
+  width: 48px;
+  height: 48px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  background: var(--birthday-cake-cream);
+  border: 2px solid #e5c98d;
+  box-shadow: 
+    0 4px 10px rgba(45, 15, 10, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.25s var(--birthday-cake-ease-spring), box-shadow 0.25s ease, border-color 0.25s ease;
+  padding: 0;
+}
+
+.birthday-cake-music-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 
+    0 6px 14px rgba(45, 15, 10, 0.45),
+    0 0 12px var(--birthday-cake-gold-glow);
+  border-color: #ffd770;
+}
+
+.birthday-cake-music-btn:active {
+  transform: scale(0.95);
+}
+
+.birthday-cake-music-btn:focus-visible {
+  outline: 2px solid #ffd770;
+  outline-offset: 3px;
+}
+
+.birthday-cake-music-disc {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #3b2219;
+  background-image: 
+    radial-gradient(circle, #2d1811 18%, transparent 20%),
+    radial-gradient(circle, transparent 40%, rgba(255, 255, 255, 0.08) 42%, transparent 44%),
+    radial-gradient(circle, transparent 65%, rgba(255, 255, 255, 0.08) 67%, transparent 69%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.birthday-cake-music-note {
+  font-size: 1.05rem;
+  color: #ffd770;
+  line-height: 1;
+}
+
+.birthday-cake-music-player.is-playing .birthday-cake-music-disc {
+  animation: birthday-cake-music-spin 3s linear infinite;
+}
+
+.birthday-cake-music-player.is-playing .birthday-cake-music-btn {
+  border-color: #ffd770;
+  box-shadow: 
+    0 4px 12px rgba(45, 15, 10, 0.4),
+    0 0 16px var(--birthday-cake-gold-glow);
+}
+
+.birthday-cake-music-indicator {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--birthday-cake-crimson);
+  border: 1.5px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.birthday-cake-music-indicator-icon {
+  width: 7px;
+  height: 7px;
+  fill: #ffffff;
+}
+
+.birthday-cake-indicator-play { display: block; }
+.birthday-cake-indicator-pause { display: none; }
+
+.birthday-cake-music-player.is-playing .birthday-cake-indicator-play { display: none; }
+.birthday-cake-music-player.is-playing .birthday-cake-indicator-pause { display: block; }
+.birthday-cake-music-player.is-playing .birthday-cake-music-indicator { background: #a31821; }
+
+.birthday-cake-music-tooltip {
+  background: rgba(251, 245, 231, 0.95);
+  color: var(--birthday-cake-ink);
+  font-family: var(--birthday-cake-font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(210, 180, 140, 0.6);
+  box-shadow: 0 2px 6px rgba(45, 15, 10, 0.25);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+}
+
+.birthday-cake-music-player:hover .birthday-cake-music-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --------------------------------------------------------------------------
+   4. Main Composition & Cream Torn-Paper Card
+   -------------------------------------------------------------------------- */
+.birthday-cake-main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3.2rem 1.25rem 2.8rem;
+  position: relative;
+  z-index: 2;
+}
+
+.birthday-cake-container {
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.birthday-cake-card {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(178deg, #fcf8f0 0%, #fbf5e7 62%, #f5ecdb 100%);
+  border-radius: 6px;
+  padding: 40px 30px 36px;
+  box-shadow: 
+    0 16px 38px rgba(35, 8, 10, 0.52),
+    0 4px 12px rgba(0, 0, 0, 0.22),
+    inset 0 0 45px rgba(220, 195, 160, 0.2);
+  border: 1px solid var(--birthday-cake-parchment-border);
+  text-align: center;
+  animation: birthday-cake-card-entrance 0.9s var(--birthday-cake-ease-spring) both;
+  transform-origin: center center;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* Deckled / irregular torn edges */
+.birthday-cake-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: radial-gradient(circle at 10px 0, transparent 6px, #fcf8f0 7px) repeat-x;
+  background-size: 16px 6px;
+  opacity: 0.65;
+}
+
+.birthday-cake-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: radial-gradient(circle at 10px 6px, transparent 6px, #f5ecdb 7px) repeat-x;
+  background-size: 16px 6px;
+  opacity: 0.65;
+}
+
+/* Masking Tape Centered at Top Edge */
+.birthday-cake-tape {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-0.8deg);
+  width: 140px;
+  height: 32px;
+  background: rgba(238, 230, 212, 0.88);
+  border-left: 2px dashed rgba(200, 185, 160, 0.5);
+  border-right: 2px dashed rgba(200, 185, 160, 0.5);
+  box-shadow: 0 2px 6px var(--birthday-cake-tape-shadow);
+  backdrop-filter: blur(1px);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Scrapbook Doodles */
+.birthday-cake-doodles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.birthday-cake-doodle {
+  position: absolute;
+  line-height: 1;
+  user-select: none;
+  opacity: 0.75;
+}
+
+.birthday-cake-doodle-1 { top: 22px; left: 20px; font-size: 1.35rem; color: #ff4760; transform: rotate(-12deg); }
+.birthday-cake-doodle-2 { top: 30px; right: 24px; font-size: 1.3rem; color: #e67e22; }
+.birthday-cake-doodle-3 { bottom: 28px; left: 24px; font-size: 1.25rem; color: #f39c12; }
+.birthday-cake-doodle-4 { bottom: 22px; right: 22px; font-size: 1.2rem; color: #e74c3c; transform: rotate(10deg); }
+
+/* Typography */
+.birthday-cake-heading {
+  font-family: var(--birthday-cake-font-hand);
+  font-size: 2.65rem;
+  font-weight: 700;
+  color: var(--birthday-cake-ink);
+  line-height: 1.15;
+  margin: 6px 0 10px;
+  letter-spacing: -0.5px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.birthday-cake-subtext {
+  font-family: var(--birthday-cake-font-serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--birthday-cake-ink-soft);
+  line-height: 1.4;
+  margin: 0 auto 20px;
+  max-width: 420px;
+}
+
+/* --------------------------------------------------------------------------
+   5. Stages Architecture
+   -------------------------------------------------------------------------- */
+.birthday-cake-stage {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(14px) scale(0.98);
+  transition: opacity 0.55s ease, transform 0.55s var(--birthday-cake-ease-spring);
+}
+
+.birthday-cake-stage.birthday-cake-stage-active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* --------------------------------------------------------------------------
+   6. STAGE 1 & 2: Cake Visual with 5 Interactive Candles
+   -------------------------------------------------------------------------- */
+.birthday-cake-visual-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.birthday-cake-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 14px 24px rgba(45, 15, 10, 0.38));
+  user-select: none;
+  -webkit-user-drag: none;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s ease;
+}
+
+/* Soft floor shadow */
+.birthday-cake-shadow {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 26px;
+  background: radial-gradient(ellipse at center, rgba(45, 15, 10, 0.45) 0%, rgba(45, 15, 10, 0) 70%);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* The Five Candles Row - perfectly positioned over top surface */
+.birthday-cake-candles-row {
+  position: absolute;
+  top: 14%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+/* Individual Candle Element */
+.birthday-cake-candle {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s var(--birthday-cake-ease-spring);
+  user-select: none;
+  touch-action: manipulation;
+  padding: 4px;
+}
+
+.birthday-cake-candle:hover {
+  transform: translateY(-3px) scale(1.08);
+}
+
+.birthday-cake-candle:focus-visible {
+  outline: 2px solid #ffd770;
+  border-radius: 6px;
+}
+
+/* Candle Wax Cylinder */
+.birthday-cake-wax {
+  width: 13px;
+  height: 48px;
+  border-radius: 3px 3px 2px 2px;
+  box-shadow: 
+    inset 1px 0 2px rgba(255, 255, 255, 0.6),
+    inset -1px 0 2px rgba(0, 0, 0, 0.25),
+    0 2px 4px rgba(45, 15, 10, 0.3);
+  position: relative;
+}
+
+/* Diagonal candy stripes on candles */
+.birthday-cake-wax-pink {
+  background: repeating-linear-gradient(
+    45deg,
+    #ff859d,
+    #ff859d 4px,
+    #ffffff 4px,
+    #ffffff 8px
+  );
+}
+
+.birthday-cake-wax-gold {
+  background: repeating-linear-gradient(
+    -45deg,
+    #f1c40f,
+    #f1c40f 4px,
+    #ffffff 4px,
+    #ffffff 8px
+  );
+}
+
+.birthday-cake-wax-rose {
+  background: repeating-linear-gradient(
+    45deg,
+    #e74c3c,
+    #e74c3c 4px,
+    #fff2f4 4px,
+    #fff2f4 8px
+  );
+  height: 52px; /* Center candle stands slightly taller */
+}
+
+/* Cotton Wick */
+.birthday-cake-wick {
+  width: 2px;
+  height: 6px;
+  background: #331d16;
+  border-radius: 1px;
+}
+
+/* Candle Flame */
+.birthday-cake-flame {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 18px;
+  background: radial-gradient(ellipse at bottom, #fff 15%, var(--birthday-cake-flame-mid) 45%, var(--birthday-cake-flame-outer) 90%);
+  border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+  box-shadow: 
+    0 0 10px 3px rgba(255, 215, 112, 0.8),
+    0 0 20px 6px rgba(243, 156, 18, 0.45);
+  animation: birthday-cake-flame-flicker 1.8s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.birthday-cake-flame-inner {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 6px;
+  background: #64b5f6;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+/* Staggered flame animation offsets */
+.birthday-cake-candle-1 .birthday-cake-flame { animation-delay: 0.1s; animation-duration: 1.7s; }
+.birthday-cake-candle-2 .birthday-cake-flame { animation-delay: 0.35s; animation-duration: 2.1s; }
+.birthday-cake-candle-3 .birthday-cake-flame { animation-delay: 0.05s; animation-duration: 1.9s; }
+.birthday-cake-candle-4 .birthday-cake-flame { animation-delay: 0.4s; animation-duration: 1.6s; }
+.birthday-cake-candle-5 .birthday-cake-flame { animation-delay: 0.2s; animation-duration: 2.0s; }
+
+/* Extinguished Candle State */
+.birthday-cake-candle.is-extinguished .birthday-cake-flame {
+  opacity: 0;
+  transform: translateX(-50%) scale(0.2);
+}
+
+/* Gentle Smoke Animation when Flame Dies */
+.birthday-cake-smoke {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(200, 190, 180, 0.8);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.birthday-cake-candle.is-extinguished .birthday-cake-smoke {
+  animation: birthday-cake-smoke-rise 1.4s ease-out forwards;
+}
+
+/* Ambient Candlelight Glow on Cake Top */
+.birthday-cake-ambient-glow {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75%;
+  height: 40px;
+  background: radial-gradient(ellipse at center, rgba(255, 220, 130, 0.45) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.birthday-cake-ambient-glow.is-dimmed {
+  opacity: 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. Buttons, Controls & Feedback
+   -------------------------------------------------------------------------- */
+.birthday-cake-controls-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.birthday-cake-btn {
+  appearance: none;
+  border: none;
+  outline: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--birthday-cake-font-ui);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 13px 24px;
+  min-height: 48px;
+  border-radius: 26px;
+  cursor: pointer;
+  transition: transform 0.22s var(--birthday-cake-ease-spring), box-shadow 0.22s ease, border-color 0.22s ease;
+  user-select: none;
+}
+
+.birthday-cake-btn-primary {
+  background: linear-gradient(135deg, #fdfbf5 0%, #faedd3 100%);
+  color: var(--birthday-cake-ink);
+  border: 2px solid #dfbb6c;
+  box-shadow: 0 4px 14px rgba(45, 15, 10, 0.25);
+}
+
+.birthday-cake-btn-primary:hover {
+  transform: translateY(-2px) scale(1.03);
+  border-color: #ffd770;
+  box-shadow: 0 8px 18px rgba(45, 15, 10, 0.35), 0 0 14px var(--birthday-cake-gold-glow);
+}
+
+.birthday-cake-btn-primary:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+.birthday-cake-btn-secondary {
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--birthday-cake-ink-soft);
+  border: 1.5px solid rgba(210, 180, 140, 0.7);
+}
+
+.birthday-cake-btn-secondary:hover {
+  background: #ffffff;
+  border-color: #dfbb6c;
+  transform: translateY(-2px);
+  color: var(--birthday-cake-ink);
+}
+
+.birthday-cake-btn-mic.is-listening {
+  background: #e74c3c;
+  color: #ffffff;
+  border-color: #c0392b;
+  animation: birthday-cake-mic-pulse 1.4s ease-in-out infinite alternate;
+}
+
+/* Feedback Banner */
+.birthday-cake-feedback-banner {
+  margin-top: 14px;
+  font-family: var(--birthday-cake-font-serif);
+  font-size: 1.12rem;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--birthday-cake-ink-soft);
+  min-height: 24px;
+  transition: opacity 0.3s ease;
+}
+
+/* Post-Blowing Success Card */
+.birthday-cake-success-card {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 16px;
+  animation: birthday-cake-reveal-up 0.7s var(--birthday-cake-ease-spring) both;
+}
+
+.birthday-cake-success-card.is-visible {
+  display: flex;
+}
+
+.birthday-cake-success-badge {
+  font-family: var(--birthday-cake-font-hand);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #c48b11;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9), 0 0 16px rgba(255, 215, 112, 0.5);
+  margin-bottom: 6px;
+}
+
+.birthday-cake-success-note {
+  font-family: var(--birthday-cake-font-serif);
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--birthday-cake-ink-soft);
+  margin-bottom: 18px;
+}
+
+/* --------------------------------------------------------------------------
+   8. STAGE 3: Cut the Cake Interactive Swipe Zone
+   -------------------------------------------------------------------------- */
+.birthday-cake-cut-area {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.birthday-cake-cut-composition {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.birthday-cake-wedge {
+  position: absolute;
+  top: 18%;
+  right: 18%;
+  width: 48%;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.8s var(--birthday-cake-ease-spring), opacity 0.6s ease;
+  z-index: 5;
+}
+
+.birthday-cake-wedge-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 12px 20px rgba(45, 15, 10, 0.45));
+}
+
+/* Sliced Animation State */
+.birthday-cake-cut-composition.is-cut .birthday-cake-wedge {
+  opacity: 1;
+  transform: translate(24px, 12px) rotate(6deg) scale(1.04);
+}
+
+.birthday-cake-cut-composition.is-cut .birthday-cake-cut-main-img {
+  transform: scale(0.98);
+}
+
+/* Cut Guide & Realistic Knife Overlay */
+.birthday-cake-cut-guide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 12;
+  transition: opacity 0.4s ease;
+  overflow: visible;
+}
+
+.birthday-cake-cut-area.is-cut .birthday-cake-cut-guide {
+  opacity: 0;
+}
+
+/* S-shaped Curved Cutting Path SVG */
+.birthday-cake-cut-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.birthday-cake-cut-path {
+  fill: none;
+  stroke: rgba(225, 45, 57, 0.88);
+  stroke-width: 3;
+  stroke-dasharray: 8 6;
+  stroke-linecap: round;
+  filter: drop-shadow(0 1px 3px rgba(255, 255, 255, 0.85)) 
+          drop-shadow(0 2px 4px rgba(60, 10, 10, 0.28));
+  animation: birthday-cake-cut-dash 3.2s linear infinite;
+}
+
+@keyframes birthday-cake-cut-dash {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+/* Cute Miniature Cake Knife Element */
+.birthday-cake-knife-wrap {
+  position: absolute;
+  top: 10.6%;   /* Matches SVG path start (32 / 300) */
+  left: 50%;    /* Matches SVG path start (150 / 300) */
+  width: 130px;
+  height: 32px;
+  transform-origin: 82% 50%; /* Blade tip anchor point */
+  transform: translate(-82%, -50%) rotate(-32deg);
+  pointer-events: none;
+  z-index: 15;
+  transition: filter 0.2s ease;
+  will-change: transform, left, top;
+  animation: birthday-cake-knife-idle 2.4s ease-in-out infinite alternate;
+}
+
+.birthday-cake-knife-wrap.is-cutting {
+  animation: none !important;
+}
+
+.birthday-cake-knife-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+.birthday-cake-knife-icon {
+  font-size: 1.8rem;
+  margin-top: -30px;
+  filter: drop-shadow(0 4px 6px rgba(45, 15, 10, 0.3));
+}
+
+.birthday-cake-cut-hint {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: var(--birthday-cake-font-ui);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  background: rgba(255, 248, 240, 0.96);
+  color: #b91c1c;
+  border: 1px solid rgba(248, 113, 113, 0.55);
+  padding: 3px 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(45, 15, 10, 0.18);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  animation: birthday-cake-hint-float 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes birthday-cake-hint-float {
+  0% { transform: translateX(-50%) translateY(0); }
+  100% { transform: translateX(-50%) translateY(-3px); }
+}
+
+.birthday-cake-cut-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 16px;
+  animation: birthday-cake-reveal-up 0.7s var(--birthday-cake-ease-spring) both;
+}
+
+.birthday-cake-cut-success.is-visible {
+  display: flex;
+}
+
+.birthday-cake-cut-note {
+  font-family: var(--birthday-cake-font-serif);
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--birthday-cake-ink-soft);
+  margin-top: 4px;
+}
+
+/* Small Decorative Dessert Fork & Strawberry */
+.birthday-cake-slice-cutlery {
+  position: absolute;
+  bottom: 8px;
+  right: 14px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.birthday-cake-slice-fork {
+  font-size: 1.7rem;
+  transform: rotate(35deg);
+  filter: drop-shadow(0 3px 5px rgba(45, 15, 10, 0.35));
+  animation: birthday-cake-sparkle-float 3.6s ease-in-out infinite alternate;
+}
+
+.birthday-cake-slice-berry {
+  font-size: 1.45rem;
+  filter: drop-shadow(0 3px 5px rgba(45, 15, 10, 0.3));
+  animation: birthday-cake-sparkle-float 4.2s ease-in-out infinite alternate 0.4s;
+}
+
+/* --------------------------------------------------------------------------
+   9. STAGE 4: A Slice For You Showcase
+   -------------------------------------------------------------------------- */
+.birthday-cake-slice-showcase {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  margin: 10px auto 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.birthday-cake-slice-img {
+  width: 100%;
+  max-width: 270px;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 14px 26px rgba(45, 15, 10, 0.4));
+  animation: birthday-cake-slice-float 4.2s ease-in-out infinite alternate;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.birthday-cake-slice-shadow {
+  bottom: 8px;
+  width: 220px;
+  height: 20px;
+}
+
+.birthday-cake-slice-sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.birthday-cake-slice-sparkle {
+  position: absolute;
+  line-height: 1;
+  user-select: none;
+}
+
+.birthday-cake-slice-sparkle.sp-1 { top: 10px; left: 24px; font-size: 1.4rem; color: #ffd770; animation: birthday-cake-sparkle-float 3s ease-in-out infinite alternate; }
+.birthday-cake-slice-sparkle.sp-2 { top: 20px; right: 28px; font-size: 1.2rem; color: #e67e22; animation: birthday-cake-sparkle-float 3.5s ease-in-out infinite alternate 0.5s; }
+.birthday-cake-slice-sparkle.sp-3 { bottom: 25px; left: 30px; font-size: 1.3rem; color: #ff4760; animation: birthday-cake-sparkle-float 3.2s ease-in-out infinite alternate 0.2s; }
+.birthday-cake-slice-sparkle.sp-4 { bottom: 30px; right: 26px; font-size: 1.25rem; color: #ffd770; animation: birthday-cake-sparkle-float 3.8s ease-in-out infinite alternate 0.8s; }
+
+.birthday-cake-btn-final {
+  padding: 15px 36px;
+  font-size: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   10. Canvas Confetti & Particles
+   -------------------------------------------------------------------------- */
+.birthday-cake-ambient-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  overflow: hidden;
+}
+
+.birthday-cake-confetti-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Card Exit Animation */
+.birthday-cake-card.birthday-cake-is-exiting {
+  opacity: 0;
+  transform: scale(0.96) translateY(-10px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+/* --------------------------------------------------------------------------
+   11. Keyframe Animations
+   -------------------------------------------------------------------------- */
+@keyframes birthday-cake-card-entrance {
+  0% { opacity: 0; transform: translateY(24px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes birthday-cake-flame-flicker {
+  0% {
+    transform: translateX(-50%) scale(1) rotate(-1deg);
+    opacity: 0.95;
+  }
+  30% {
+    transform: translateX(-50%) scale(1.05, 0.95) rotate(1.5deg);
+    opacity: 1;
+  }
+  65% {
+    transform: translateX(-50%) scale(0.96, 1.04) rotate(-2deg);
+    opacity: 0.92;
+  }
+  100% {
+    transform: translateX(-50%) scale(1.02, 0.98) rotate(1deg);
+    opacity: 0.98;
+  }
+}
+
+@keyframes birthday-cake-smoke-rise {
+  0% {
+    opacity: 0.8;
+    transform: translate(-50%, 0) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate(calc(-50% + 4px), -24px) scale(2.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% - 6px), -48px) scale(3.5);
+  }
+}
+
+@keyframes birthday-cake-slice-float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(-1deg); }
+  100% { transform: translateY(-2px) rotate(1deg); }
+}
+
+@keyframes birthday-cake-knife-idle {
+  0% { transform: translate(-82%, -50%) rotate(-32deg) translateY(0); }
+  50% { transform: translate(-82%, -50%) rotate(-28deg) translateY(-5px); }
+  100% { transform: translate(-82%, -50%) rotate(-34deg) translateY(2px); }
+}
+
+@keyframes birthday-cake-knife-rock {
+  0% { transform: translate(-82%, -50%) rotate(-36deg); }
+  100% { transform: translate(-82%, -50%) rotate(-26deg); }
+}
+
+@keyframes birthday-cake-knife-bob {
+  0% { transform: translateY(0) rotate(-15deg); }
+  100% { transform: translateY(-8px) rotate(-10deg); }
+}
+
+@keyframes birthday-cake-sparkle-float {
+  0% { transform: translateY(0) scale(0.9); }
+  100% { transform: translateY(-6px) scale(1.15); }
+}
+
+@keyframes birthday-cake-reveal-up {
+  0% { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes birthday-cake-mic-pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.6); }
+  100% { transform: scale(1.04); box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+}
+
+@keyframes birthday-cake-music-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   12. Responsive Design
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .birthday-cake-main {
+    padding: 2rem 0.85rem 2.2rem;
+  }
+
+  .birthday-cake-card {
+    padding: 32px 16px 26px;
+    border-radius: 6px;
+  }
+
+  .birthday-cake-tape {
+    width: 115px;
+    height: 28px;
+    top: -14px;
+  }
+
+  .birthday-cake-heading {
+    font-size: 2.15rem;
+    margin: 4px 0 8px;
+  }
+
+  .birthday-cake-subtext {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+
+  .birthday-cake-visual-wrap,
+  .birthday-cake-cut-area {
+    max-width: 290px;
+    margin-bottom: 14px;
+  }
+
+  .birthday-cake-knife-wrap {
+    width: 108px;
+    height: 27px;
+  }
+
+  .birthday-cake-cut-hint {
+    font-size: 0.72rem;
+    padding: 2px 10px;
+    bottom: -20px;
+  }
+
+  .birthday-cake-candles-row {
+    top: 13%;
+    width: 72%;
+  }
+
+  .birthday-cake-wax {
+    width: 11px;
+    height: 40px;
+  }
+
+  .birthday-cake-wax-rose {
+    height: 44px;
+  }
+
+  .birthday-cake-flame {
+    top: -16px;
+    width: 10px;
+    height: 15px;
+  }
+
+  .birthday-cake-btn {
+    font-size: 0.84rem;
+    padding: 12px 18px;
+    min-height: 46px;
+    letter-spacing: 0.8px;
+  }
+
+  .birthday-cake-slice-showcase {
+    max-width: 260px;
+  }
+
+  .birthday-cake-music-player {
+    top: 14px;
+    left: 14px;
+  }
+
+  .birthday-cake-music-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .birthday-cake-music-tooltip {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. Accessibility: prefers-reduced-motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .birthday-cake-flame,
+  .birthday-cake-slice-img,
+  .birthday-cake-knife-icon,
+  .birthday-cake-music-disc {
+    animation: none !important;
+  }
+}
+

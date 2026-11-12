@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sathya's Birthday — The Secret Envelope</title>
+
+  <!-- Typography: Vintage romantic cursive handwriting & warm readable serif/sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Dancing+Script:wght@600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="envelope.css">
+</head>
+<body class="envelope-body">
+
+  <!-- SVG Filter for Deckled/Torn Paper Edges on the Letter -->
+  <svg class="envelope-sr-only" aria-hidden="true" width="0" height="0">
+    <defs>
+      <filter id="envelope-deckle-filter">
+        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <main class="envelope-main">
+    <section class="envelope-section" id="envelope-section" aria-label="Birthday envelope introduction">
+
+      <!-- Responsive Canvas: max-width 1200px, preserves 1671:941 aspect ratio, centered in viewport -->
+      <div class="envelope-container" id="envelope-container" data-state="closed">
+
+        <!-- 1. Single Full Background Composition (Approved Reference Artwork) -->
+        <img 
+          src="assets/envelope-hero.webp" 
+          alt="Sathya's Birthday Envelope" 
+          class="envelope-hero-bg" 
+          draggable="false"
+        />
+
+        <!-- 2. Golden Interior Light Burst & Star Sparkles (radiates when envelope opens) -->
+        <div class="envelope-glow-burst" id="envelope-glow-burst" aria-hidden="true">
+          <div class="envelope-glow-core"></div>
+          <div class="envelope-sparkle sp-1">✦</div>
+          <div class="envelope-sparkle sp-2">✨</div>
+          <div class="envelope-sparkle sp-3">✦</div>
+          <div class="envelope-sparkle sp-4">⋆</div>
+          <div class="envelope-sparkle sp-5">✦</div>
+          <div class="envelope-sparkle sp-6">✨</div>
+        </div>
+
+        <!-- 3. Open Flap Peak & Interior Light Flare Layer (revealed on open) -->
+        <div class="envelope-open-peak" id="envelope-open-peak" aria-hidden="true">
+          <img src="assets/envelope-open-header.webp" alt="" class="envelope-open-peak-img" draggable="false" />
+        </div>
+
+        <!-- 4. The Personal Letter Card (slides up smoothly out of envelope pocket) -->
+        <article class="envelope-letter" id="envelope-letter" aria-label="Personal message for Sathya">
+          
+          <!-- Brass Binder Clip at top center -->
+          <div class="envelope-letter-clip" aria-hidden="true">
+            <svg viewBox="0 0 70 75" class="envelope-clip-svg">
+              <defs>
+                <linearGradient id="envelope-gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#faecc0"/>
+                  <stop offset="30%" stop-color="#caa24c"/>
+                  <stop offset="60%" stop-color="#fff4cd"/>
+                  <stop offset="85%" stop-color="#9a7226"/>
+                  <stop offset="100%" stop-color="#e3bf66"/>
+                </linearGradient>
+                <filter id="envelope-clip-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="rgba(40,15,5,0.45)"/>
+                </filter>
+              </defs>
+              <!-- Wire loop -->
+              <path d="M 28 42 C 27 22 24 14 31 7 C 35 2 41 2 45 7 C 52 14 49 22 48 42" 
+                    fill="none" stroke="url(#envelope-gold-grad)" stroke-width="3.2" stroke-linecap="round" filter="url(#envelope-clip-shadow)"/>
+              <!-- Clamp metallic base -->
+              <polygon points="12,42 64,42 60,68 16,68" fill="#3b2b1a" stroke="url(#envelope-gold-grad)" stroke-width="1.6" filter="url(#envelope-clip-shadow)"/>
+              <polygon points="14,44 62,44 58,66 18,66" fill="#22170d"/>
+              <!-- Clamp wire legs -->
+              <path d="M 28 42 L 18 64" fill="none" stroke="url(#envelope-gold-grad)" stroke-width="2.6" stroke-linecap="round"/>
+              <path d="M 48 42 L 58 64" fill="none" stroke="url(#envelope-gold-grad)" stroke-width="2.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Hand-drawn heart doodle at top right -->
+          <div class="envelope-letter-heart" aria-hidden="true">
+            <svg viewBox="0 0 36 36" class="envelope-heart-svg">
+              <path d="M 18 30 C 18 30 5 21 5 12 C 5 7 9 4 14.5 5 C 16.8 5.5 18 7.5 18 7.5 C 18 7.5 19.2 5.5 21.5 5 C 27 4 31 7 31 12 C 31 21 18 30 18 30 Z" 
+                    fill="none" stroke="#683d2c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <!-- Pressed Botanical Yellow Wildflower Sticker on left -->
+          <div class="envelope-letter-flower" aria-hidden="true">
+            <img src="assets/envelope-flower.webp" alt="" class="envelope-flower-img" draggable="false" />
+          </div>
+
+          <!-- Letter Body & Handwritten Heading -->
+          <div class="envelope-letter-body-wrap">
+            <h1 class="envelope-letter-heading">
+              To the girl who makes everything a little more beautiful…
+            </h1>
+            <div class="envelope-letter-flourish" aria-hidden="true"></div>
+
+            <p class="envelope-letter-text">
+              Here's a small gift I made just for you. I hope you like it. <span class="envelope-heart-symbol" aria-hidden="true">🤍</span>
+            </p>
+          </div>
+
+          <!-- Call to Action Button with flanking radiant accent marks -->
+          <div class="envelope-letter-cta">
+            <div class="envelope-cta-rays envelope-cta-rays-left" aria-hidden="true">
+              <span class="envelope-ray"></span>
+              <span class="envelope-ray"></span>
+              <span class="envelope-ray"></span>
+            </div>
+
+            <button class="envelope-gift-btn" id="envelope-open-gift-btn" type="button" aria-label="Open your gift">
+              <span class="envelope-gift-btn-label">OPEN YOUR GIFT &rarr;</span>
+              <span class="envelope-gift-btn-glow" aria-hidden="true"></span>
+            </button>
+
+            <div class="envelope-cta-rays envelope-cta-rays-right" aria-hidden="true">
+              <span class="envelope-ray"></span>
+              <span class="envelope-ray"></span>
+              <span class="envelope-ray"></span>
+            </div>
+          </div>
+
+        </article>
+
+        <!-- 5. Transparent Layer: Envelope Front Pocket & Hands (Letter slides out from behind this) -->
+        <div class="envelope-front-pocket" id="envelope-front-pocket" aria-hidden="true">
+          <img src="assets/envelope-front.webp" alt="" class="envelope-front-img" draggable="false" />
+        </div>
+
+        <!-- 6. Transparent Layer: Envelope Flap (3D CSS fold) -->
+        <div class="envelope-flap" id="envelope-flap" aria-hidden="true">
+          <img src="assets/envelope-flap-clean.webp" alt="" class="envelope-flap-img" draggable="false" />
+        </div>
+
+        <!-- 7. Transparent Layer: Circular Red Wax Play Seal Button (Keyboard accessible & pulsing) -->
+        <button class="envelope-seal-btn" id="envelope-seal-btn" type="button"
+                aria-label="Open birthday envelope" aria-expanded="false" 
+                aria-controls="envelope-letter">
+          <img src="assets/seal.webp" alt="" class="envelope-seal-img" draggable="false" />
+          <span class="envelope-seal-pulse-glow" aria-hidden="true"></span>
+        </button>
+
+      </div>
+
+    </section>
+  </main>
+
+  <script src="envelope.js"></script>
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#8b0d11">
+  <title>Beautiful Memories with Sathya — Sathya's Birthday</title>
+
+  <!-- Google Fonts: Romantic vintage cursive handwriting & warm serif/sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Dancing+Script:wght@600;700&family=Marck+Script&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/beautiful-memories.css">
+</head>
+<body class="beautiful-memories-body">
+
+  <!-- Ambient Scrapbook Floating Particles -->
+  <div class="beautiful-memories-ambient" aria-hidden="true">
+    <span class="beautiful-memories-ambient-item bm-heart-1">♡</span>
+    <span class="beautiful-memories-ambient-item bm-heart-2">♥</span>
+    <span class="beautiful-memories-ambient-item bm-heart-3">♡</span>
+    <span class="beautiful-memories-ambient-item bm-star-1">✨</span>
+    <span class="beautiful-memories-ambient-item bm-star-2">✦</span>
+    <span class="beautiful-memories-ambient-item bm-star-3">⋆</span>
+    <span class="beautiful-memories-ambient-item bm-heart-4">♡</span>
+  </div>
+
+  <!-- Reusable Fixed Top-Left Background Music Player -->
+  <aside class="beautiful-memories-music-player" id="beautiful-memories-music-player" aria-label="Background music controls">
+    <button 
+      type="button" 
+      class="beautiful-memories-music-btn" 
+      id="beautiful-memories-music-btn" 
+      aria-label="Toggle background music"
+      aria-pressed="false"
+    >
+      <div class="beautiful-memories-music-disc" aria-hidden="true">
+        <span class="beautiful-memories-music-note">♪</span>
+      </div>
+      <span class="beautiful-memories-music-indicator" aria-hidden="true">
+        <svg class="beautiful-memories-music-indicator-icon beautiful-memories-indicator-play" viewBox="0 0 10 10">
+          <polygon points="2.5,1.5 8.5,5 2.5,8.5" />
+        </svg>
+        <svg class="beautiful-memories-music-indicator-icon beautiful-memories-indicator-pause" viewBox="0 0 10 10">
+          <rect x="2" y="1.5" width="2" height="7" rx="0.5" />
+          <rect x="6" y="1.5" width="2" height="7" rx="0.5" />
+        </svg>
+      </span>
+    </button>
+    <span class="beautiful-memories-music-tooltip">Music ♪</span>
+    <audio id="beautiful-memories-audio" preload="auto" loop>
+      <source src="assets/music/birthday-song.mp3" type="audio/mpeg">
+      <source src="assets/music/birthday-song.wav" type="audio/wav">
+    </audio>
+  </aside>
+
+  <!-- Main Full-Length Vertical Scroll Container -->
+  <main class="beautiful-memories-main" id="beautiful-memories-main">
+    
+    <!-- Top Header Section (Always loaded first at the very top of the page) -->
+    <header class="beautiful-memories-header" id="beautiful-memories-header">
+      <div class="beautiful-memories-header-card">
+        <!-- Masking Tape Header Accent -->
+        <div class="beautiful-memories-tape beautiful-memories-tape-header" aria-hidden="true"></div>
+        
+        <span class="beautiful-memories-chapter-badge">CHAPTER 04 • CHERISHED MEMORIES</span>
+        <h1 class="beautiful-memories-title">BEAUTIFUL MEMORIES WITH SATHYA 🤍</h1>
+        <div class="beautiful-memories-title-flourish" aria-hidden="true"></div>
+        
+        <p class="beautiful-memories-subtitle">
+          Every photograph is a little piece of magic, a quiet conversation, and a treasured moment kept close to my heart.
+        </p>
+
+        <!-- Downward Scroll Indicator -->
+        <div class="beautiful-memories-scroll-cue" aria-hidden="true">
+          <span class="beautiful-memories-scroll-text">Scroll down to relive each memory</span>
+          <div class="beautiful-memories-scroll-arrow">↓</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 12 Individual Vertical Photo Sections (One Large Photograph at a Time) -->
+    <div class="beautiful-memories-gallery" id="beautiful-memories-gallery">
+
+      <!-- ================= PHOTO 01 ================= -->
+      <section class="beautiful-memories-photo-section" id="memory-section-1" aria-label="Memory 1 of 12">
+        <article class="beautiful-memories-polaroid-card polaroid-tilt-left" data-index="1">
+          <div class="beautiful-memories-washi-tape washi-tape-center" aria-hidden="true"></div>
+          <span class="beautiful-memories-counter-tag">01 / 12</span>
+          
+          <div class="beautiful-memories-photo-frame">
+            <img 
+              src="assets/photos/photo-1.webp" 
+              alt="Memory 1 with Sathya" 
+              class="beautiful-memories-img" 
+              loading="eager"
+              onerror="this.onerror=null; this.src='assets/photos/sathya-birthday-photo.webp';"
+            />
+            <div class="beautiful-memories-photo-vignette" aria-hidden="true"></div>
+          </div>
+
+          <div class="beautiful-memories-caption-area">
+            <p class="beautiful-memories-caption">
+              “The very smile that brightens even the cloudiest of days.”
+            </p>
+            <div class="beautiful-memories-doodle-dcor" aria-hidden="true">♡</div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ================= PHOTO 02 ================= -->
+      <section class="beautiful-memories-photo-section" id="memory-section-2" aria-label="Memory 2 of 12">
+        <article class="beautiful-memories-polaroid-card polaroid-tilt-right" data-index="2">
+          <div class="beautiful-memories-washi-tape washi-tape-left" aria-hidden="true"></div>
+          <span class="beautiful-memories-counter-tag">02 / 12</span>
+          
+          <div class="beautiful-memories-photo-frame">
+            <img 
+              src="assets/photos/photo-2.webp" 
+              alt="Memory 2 with Sathya" 
+              class="beautiful-memories-img" 
+              loading="lazy"
+              onerror="this.onerror=null; this.src='assets/photos/sathya-birthday-photo.webp';"
+            />
+            <div class="beautiful-memories-photo-vignette" aria-hidden="true"></div>
+          </div>
+
+          <div class="beautiful-memories-caption-area">
+            <p class="beautiful-memories-caption">
+              “Endless conversations, quiet laughter, and moments that feel like home.”
+            </p>
+            <div class="beautiful-memories-doodle-dcor" aria-hidden="true">✨</div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ================= PHOTO 03 ================= -->
+      <section class="beautiful-memories-photo-section" id="memory-section-3" aria-label="Memory 3 of 12">
+        <article class="beautiful-memories-polaroid-card polaroid-tilt-slight-left" data-index="3">
+          <div class="beautiful-memories-washi-tape washi-tape-right" aria-hidden="true"></div>
+          <span class="beautiful-memories-counter-tag">03 / 12</span>
+          
+          <div class="beautiful-memories-photo-frame">
+            <img 
+              src="assets/photos/photo-3.webp" 
+              alt="Memory 3 with Sathya" 
+              class="beautiful-memories-img" 
+              loading="lazy"
+              onerror="this.onerror=null; this.src='assets/photos/sathya-birthday-photo.webp';"
+            />
+            <div class="beautiful-memories-photo-vignette" aria-hidden="true"></div>
+          </div>
+
+          <div class="beautiful-memories-caption-area">
+            <p class="beautiful-memories-caption">
+              “The pure sparkle in your eyes whenever something truly delights you.”
+            </p>
+            <div class="beautiful-memories-doodle-dcor" aria-hidden="true">✦</div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ================= PHOTO 04 ================= -->
+      <section class="beautiful-memories-photo-section" id="memory-section-4" aria-label="Memory 4 of 12">
+        <article class="beautiful-memories-polaroid-card polaroid-tilt-right" data-index="4">
+          <div class="beautiful-memories-washi-tape washi-tape-double" aria-hidden="true"></div>
+          <span class="beautiful-memories-counter-tag">04 / 12</span>
+          
+          <div class="beautiful-memories-photo-frame">
+            <img 
+              src="assets/photos/photo-4.webp" 
+              alt="Memory 4 with Sathya" 
+              class="beautiful-memories-img" 
+              loading="lazy"
+              onerror="this.onerror=null; this.src='assets/photos/sathya-birthday-photo.webp';"
+            />
+            <div class="beautiful-memories-photo-vignette" aria-hidden="true"></div>
+          </div>
+
+          <div class="beautiful-memories-caption-area">
+            <p class="beautiful-memories-caption">
+              “A sweet candid memory captured in time — completely unforgettable.”
+            </p>
+            <div class="beautiful-memories-doodle-dcor" aria-hidden="true">🤍</div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ================= PHOTO 05 ================= -->
+      <section class="beautiful-memories-photo-section" id="memory-section-5" aria-label="Memory 5 of 12">
+        <article class="beautiful-memories-polaroid-card polaroid-tilt-left" data-index="5">
+          <div class="beautiful-memories-washi-tape washi-tape-center" aria-hidden="true"></div>
+          <span class="beautiful-memories-counter-tag">05 / 12</span>
+          
+          <div class="beautiful-memories-photo-frame">
+            <img 
+              src="assets/photos/photo-5.webp" 
+              alt="Memory 5 with Sathya" 
+              class="beautiful-memories-img" 
+              loading="lazy"
+              onerror="this.onerror=null; this.src='assets/photos/sathya-birthday-photo.webp';"
+            />
+            <div class="beautiful-memories-photo-vignette" aria-hidden="true"></div>
+          </div>
+
+          <div class="beautiful-memories-caption-area">
+            <p class="beautiful-memories-caption">
+              “Your effortless grace and the gentle warmth you bring everywhere.”
+            </p>
+            <div class="beautiful-memories-doodle-dcor" aria-hidden="true">🌸</div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ================= PHOTO 06 ================= -->
+      <section class="beautiful-memories-photo-section" id="memory-section-6" aria-label="Memory 6 of 12">
+        <article class="beautiful-memories-polaroid-card polaroid-tilt-slight-right" data-index="6">
+          <div class="beautiful-memories-washi-tape washi-tape-left" aria-hidden="true"></div>
+          <span class="beautiful-memories-counter-tag">06 / 12</span>
+          
+          <div class="beautiful-memories-photo-frame">
+            <img 
+              src="assets/photos/photo-6.webp" 
+              alt="Memory 6 with Sathya" 
+              class="beautiful-memories-img" 
+              loading="lazy"
+              onerror="this.onerror=null; this.src='assets/photos/sathya-birthday-photo.webp';"
+            />
+            <div class="beautiful-memories-photo-vignette" aria-hidden="true"></div>
+          </div>
+
+          <div class="beautiful-memories-caption-area">
+            <p class="beautiful-memories-caption">
+              “Every silly shared joke and the times we couldn't stop laughing.”
+            </p>
+            <div class="beautiful-memories-doodle-dcor" aria-hidden="true">♡</div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ================= PHOTO 07 ================= -->
+      <section class="beautiful-memories-photo-section" id="memory-section-7" aria-label="Memory 7 of 12">
+        <article class="beautiful-memories-polaroid-card polaroid-tilt-left" data-index="7">
+          <div class="beautiful-memories-washi-tape washi-tape-right" aria-hidden="true"></div>
+          <span class="beautiful-memories-counter-tag">07 / 12</span>
+          
+          <div class="beautiful-memories-photo-frame">
+            <img 
+              src="assets/photos/photo-7.webp" 
+              alt="Memory 7 with Sathya" 
+              class="beautiful-memories-img" 
+              loading="lazy"
+              onerror="this.onerror=null; this.src='assets/photos/sathya-birthday-photo.webp';"
+            />
+            <div class="beautiful-memories-photo-vignette" aria-hidden="true"></div>
+          </div>
+
+          <div class="beautiful-memories-caption-area">
+            <p class="beautiful-memories-caption">
+              “Finding serenity in simple moments, just knowing you are near.”
+            </p>
+            <div class="beautiful-memories-doodle-dcor" aria-hidden="true">🌿</div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ================= PHOTO 08 ================= -->
+      <section class="beautiful-memories-photo-section" id="memory-section-8" aria-label="Memory 8 of 12">
+        <article class="beautiful-memories-polaroid-card polaroid-tilt-right" data-index="8">
+          <div class="beautiful-memories-washi-tape washi-tape-center" aria-hidden="true"></div>
+          <span class="beautiful-memories-counter-tag">08 / 12</span>
+          
+          <div class="beautiful-memories-photo-frame">
+            <img 
+              src="assets/photos/photo-8.webp" 
+              alt="Memory 8 with Sathya" 
+              class="beautiful-memories-img" 
+              loading="lazy"
+              onerror="this.onerror=null; this.src='assets/photos/sathya-birthday-photo.webp';"
+            />
+            <div class="beautiful-memories-photo-vignette" aria-hidden="true"></div>
+          </div>
+
+          <div class="beautiful-memories-caption-area">
+            <p class="beautiful-memories-caption">
+              “Golden sunshine, radiant smiles, and a memory I will always cherish.”
+            </p>
+            <div class="beautiful-memories-doodle-dcor" aria-hidden="true">☀️</div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ================= PHOTO 09 ================= -->
+      <section class="beautiful-memories-photo-section" id="memory-section-9" aria-label="Memory 9 of 12">
+        <article class="beautiful-memories-polaroid-card polaroid-tilt-slight-left" data-index="9">
+          <div class="beautiful-memories-washi-tape washi-tape-left" aria-hidden="true"></div>
+          <span class="beautiful-memories-counter-tag">09 / 12</span>
+          
+          <div class="beautiful-memories-photo-frame">
+            <img 
+              src="assets/photos/photo-9.webp" 
+              alt="Memory 9 with Sathya" 
+              class="beautiful-memories-img" 
+              loading="lazy"
+              onerror="this.onerror=null; this.src='assets/photos/sathya-birthday-photo.webp';"
+            />
+            <div class="beautiful-memories-photo-vignette" aria-hidden="true"></div>
+          </div>
+
+          <div class="beautiful-memories-caption-area">
+            <p class="beautiful-memories-caption">
+              “Because with you, ordinary moments effortlessly turn into magic.”
+            </p>
+            <div class="beautiful-memories-doodle-dcor" aria-hidden="true">✨</div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ================= PHOTO 10 ================= -->
+      <section class="beautiful-memories-photo-section" id="memory-section-10" aria-label="Memory 10 of 12">
+        <article class="beautiful-memories-polaroid-card polaroid-tilt-right" data-index="10">
+          <div class="beautiful-memories-washi-tape washi-tape-right" aria-hidden="true"></div>
+          <span class="beautiful-memories-counter-tag">10 / 12</span>
+          
+          <div class="beautiful-memories-photo-frame">
+            <img 
+              src="assets/photos/photo-10.webp" 
+              alt="Memory 10 with Sathya" 
+              class="beautiful-memories-img" 
+              loading="lazy"
+              onerror="this.onerror=null; this.src='assets/photos/sathya-birthday-photo.webp';"
+            />
+            <div class="beautiful-memories-photo-vignette" aria-hidden="true"></div>
+          </div>
+
+          <div class="beautiful-memories-caption-area">
+            <p class="beautiful-memories-caption">
+              “Your joyful laugh will always be my absolute favorite melody.”
+            </p>
+            <div class="beautiful-memories-doodle-dcor" aria-hidden="true">♪</div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ================= PHOTO 11 ================= -->
+      <section class="beautiful-memories-photo-section" id="memory-section-11" aria-label="Memory 11 of 12">
+        <article class="beautiful-memories-polaroid-card polaroid-tilt-left" data-index="11">
+          <div class="beautiful-memories-washi-tape washi-tape-double" aria-hidden="true"></div>
+          <span class="beautiful-memories-counter-tag">11 / 12</span>
+          
+          <div class="beautiful-memories-photo-frame">
+            <img 
+              src="assets/photos/photo-11.webp" 
+              alt="Memory 11 with Sathya" 
+              class="beautiful-memories-img" 
+              loading="lazy"
+              onerror="this.onerror=null; this.src='assets/photos/sathya-birthday-photo.webp';"
+            />
+            <div class="beautiful-memories-photo-vignette" aria-hidden="true"></div>
+          </div>
+
+          <div class="beautiful-memories-caption-area">
+            <p class="beautiful-memories-caption">
+              “Growing closer each day, discovering new reasons to admire you.”
+            </p>
+            <div class="beautiful-memories-doodle-dcor" aria-hidden="true">♡</div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ================= PHOTO 12 ================= -->
+      <section class="beautiful-memories-photo-section" id="memory-section-12" aria-label="Memory 12 of 12">
+        <article class="beautiful-memories-polaroid-card polaroid-tilt-center" data-index="12">
+          <div class="beautiful-memories-washi-tape washi-tape-gold" aria-hidden="true"></div>
+          <span class="beautiful-memories-counter-tag tag-gold">12 / 12</span>
+          
+          <div class="beautiful-memories-photo-frame">
+            <img 
+              src="assets/photos/photo-12.webp" 
+              alt="Memory 12 with Sathya" 
+              class="beautiful-memories-img" 
+              loading="lazy"
+              onerror="this.onerror=null; this.src='assets/photos/sathya-birthday-photo.webp';"
+            />
+            <div class="beautiful-memories-photo-vignette" aria-hidden="true"></div>
+          </div>
+
+          <div class="beautiful-memories-caption-area">
+            <p class="beautiful-memories-caption caption-highlight">
+              “Thank you for being the most precious, wonderful part of my life, Sathya. 🤍”
+            </p>
+            <div class="beautiful-memories-doodle-dcor" aria-hidden="true">✨</div>
+          </div>
+        </article>
+      </section>
+
+    </div><!-- /.beautiful-memories-gallery -->
+
+    <!-- ================= FINAL CLOSING MESSAGE & CONTINUE BUTTON ================= -->
+    <!-- Appears only after Photo 12 -->
+    <footer class="beautiful-memories-closing-section" id="beautiful-memories-closing">
+      <div class="beautiful-memories-closing-card" id="beautiful-memories-closing-card">
+        
+        <!-- Washi Tape Strips -->
+        <div class="beautiful-memories-tape beautiful-memories-tape-closing-tl" aria-hidden="true"></div>
+        <div class="beautiful-memories-tape beautiful-memories-tape-closing-tr" aria-hidden="true"></div>
+
+        <!-- Decorative Doodles -->
+        <div class="beautiful-memories-closing-doodles" aria-hidden="true">
+          <span class="bm-closing-doodle cd-1">♡</span>
+          <span class="bm-closing-doodle cd-2">✨</span>
+          <span class="bm-closing-doodle cd-3">🤍</span>
+        </div>
+
+        <span class="beautiful-memories-closing-pretitle">A FINAL SURPRISE AWAITS...</span>
+        
+        <h2 class="beautiful-memories-closing-heading">
+          And countless more memories to create together...
+        </h2>
+
+        <div class="beautiful-memories-divider" aria-hidden="true">
+          <span>~ ♡ ~</span>
+        </div>
+
+        <p class="beautiful-memories-closing-text">
+          Every picture is a chapter, but our best stories are still waiting to be written. There is one more very special thing written just for you, straight from the deepest corner of my heart.
+        </p>
+
+        <!-- Only the final memories page has this CONTINUE button -->
+        <div class="beautiful-memories-action-area">
+          <button 
+            type="button" 
+            class="beautiful-memories-continue-btn" 
+            id="beautiful-memories-continue-btn"
+            aria-label="Continue to Sathya's birthday letter"
+          >
+            <span class="beautiful-memories-btn-text">CONTINUE TO BIRTHDAY LETTER →</span>
+            <span class="beautiful-memories-btn-icon" aria-hidden="true">💌</span>
+          </button>
+        </div>
+
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="js/beautiful-memories.js"></script>
+</body>
+</html>

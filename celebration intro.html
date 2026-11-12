@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#8b0d11">
+  <title>Sathya's Birthday — Ready for a Little Celebration?</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Marck+Script&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/celebration-intro.css">
+</head>
+<body class="celebration-intro-body">
+
+  <!-- Ambient Golden Glowing Particles & Expanding Light Overlay -->
+  <div class="celebration-intro-ambient-effects" id="celebration-intro-ambient" aria-hidden="true">
+    <div class="celebration-intro-particles-container" id="celebration-intro-particles"></div>
+    <div class="celebration-intro-golden-glow-overlay" id="celebration-intro-glow-overlay"></div>
+  </div>
+
+  <!-- Reusable Background Music Player (Fixed Top-Left) -->
+  <aside class="celebration-intro-music-player" id="celebration-intro-music-player" aria-label="Background music controls">
+    <button 
+      type="button" 
+      class="celebration-intro-music-btn" 
+      id="celebration-intro-music-btn" 
+      aria-label="Toggle background music"
+      aria-pressed="false"
+    >
+      <div class="celebration-intro-music-disc" aria-hidden="true">
+        <span class="celebration-intro-music-note">♪</span>
+      </div>
+      <span class="celebration-intro-music-indicator" aria-hidden="true">
+        <svg class="celebration-intro-music-indicator-icon celebration-intro-indicator-play" viewBox="0 0 10 10">
+          <polygon points="2.5,1.5 8.5,5 2.5,8.5" />
+        </svg>
+        <svg class="celebration-intro-music-indicator-icon celebration-intro-indicator-pause" viewBox="0 0 10 10">
+          <rect x="2" y="1.5" width="2" height="7" rx="0.5" />
+          <rect x="6" y="1.5" width="2" height="7" rx="0.5" />
+        </svg>
+      </span>
+    </button>
+    <span class="celebration-intro-music-tooltip">Music ♪</span>
+    <audio id="celebration-intro-audio" preload="auto" loop>
+      <source src="assets/music/birthday-song.mp3" type="audio/mpeg">
+      <source src="assets/music/birthday-song.wav" type="audio/wav">
+    </audio>
+  </aside>
+
+  <!-- Main Viewport Composition -->
+  <main class="celebration-intro-main" id="celebration-intro-main">
+    <div class="celebration-intro-container">
+
+      <!-- Cream Torn-Paper Panel -->
+      <article class="celebration-intro-card" id="celebration-intro-card" aria-label="Celebration invitation card">
+        
+        <!-- Masking Tape Centered at Top -->
+        <div class="celebration-intro-tape" aria-hidden="true"></div>
+
+        <!-- Hand-drawn heart doodles and yellow/orange emphasis brush strokes -->
+        <div class="celebration-intro-doodles" aria-hidden="true">
+          <span class="celebration-intro-doodle celebration-intro-doodle-heart-1">♡</span>
+          <span class="celebration-intro-doodle celebration-intro-doodle-heart-2">♥</span>
+          <span class="celebration-intro-doodle celebration-intro-doodle-sparkle-1">✦</span>
+          <span class="celebration-intro-doodle celebration-intro-doodle-sparkle-2">✨</span>
+          <div class="celebration-intro-brush-stroke celebration-intro-stroke-top"></div>
+          <div class="celebration-intro-brush-stroke celebration-intro-stroke-bottom"></div>
+        </div>
+
+        <!-- ================= STAGE 1: INVITATION ================= -->
+        <section class="celebration-intro-stage celebration-intro-stage-1 celebration-intro-stage-active" id="celebration-intro-stage-1" aria-labelledby="celebration-intro-title">
+          
+          <!-- Large Cream Gift Box with Red Heart Pattern & Oversized Red Ribbon -->
+          <div class="celebration-intro-gift-wrap" aria-hidden="true">
+            <div class="celebration-intro-gift-shadow"></div>
+            <img 
+              src="assets/gift-box.webp" 
+              alt="Beautiful cream gift box with scattered red hearts and a large red ribbon bow" 
+              class="celebration-intro-gift-img" 
+              id="celebration-intro-gift-img"
+              draggable="false"
+            />
+          </div>
+
+          <!-- Handwritten Dark-Red Main Heading -->
+          <h1 class="celebration-intro-heading" id="celebration-intro-title">
+            Ready for a little celebration?
+          </h1>
+
+          <!-- Supporting Message -->
+          <p class="celebration-intro-message">
+            I have something special planned for you...
+          </p>
+
+          <!-- Main Interactive Button -->
+          <button 
+            type="button" 
+            class="celebration-intro-btn" 
+            id="celebration-intro-start-btn" 
+            aria-label="Tap to start celebration"
+          >
+            <span class="celebration-intro-btn-text">TAP TO START CELEBRATION ✨</span>
+            <span class="celebration-intro-btn-glow" aria-hidden="true"></span>
+          </button>
+        </section>
+
+        <!-- ================= STAGE 2: CLOSE YOUR EYES ================= -->
+        <section class="celebration-intro-stage celebration-intro-stage-2" id="celebration-intro-stage-2" aria-hidden="true">
+          <div class="celebration-intro-stage-inner">
+            <div class="celebration-intro-stage-icon" aria-hidden="true">🙈✨</div>
+            <h2 class="celebration-intro-stage-heading celebration-intro-fade-in-1">
+              Close your eyes, Sathya...
+            </h2>
+            <p class="celebration-intro-stage-subtext celebration-intro-fade-in-2" id="celebration-intro-stage-2-sub">
+              Don't peek! 🤍
+            </p>
+          </div>
+        </section>
+
+        <!-- ================= STAGE 3: MAKE A WISH ================= -->
+        <section class="celebration-intro-stage celebration-intro-stage-3" id="celebration-intro-stage-3" aria-hidden="true">
+          <div class="celebration-intro-stage-inner">
+            <div class="celebration-intro-stage-icon celebration-intro-magic-wand" aria-hidden="true">✨🕯️✨</div>
+            <h2 class="celebration-intro-stage-heading celebration-intro-fade-in-1">
+              Take a deep breath...
+            </h2>
+            <p class="celebration-intro-stage-subtext celebration-intro-fade-in-2 celebration-intro-wish-highlight" id="celebration-intro-stage-3-sub">
+              Make a beautiful wish. ✨
+            </p>
+          </div>
+        </section>
+
+        <!-- ================= STAGE 4: CAKE TRANSITION ================= -->
+        <section class="celebration-intro-stage celebration-intro-stage-4" id="celebration-intro-stage-4" aria-hidden="true">
+          <div class="celebration-intro-stage-inner">
+            <div class="celebration-intro-stage-icon celebration-intro-pulse-icon" aria-hidden="true">🎂💫</div>
+            <h2 class="celebration-intro-stage-heading celebration-intro-fade-in-1">
+              Your birthday surprise is waiting...
+            </h2>
+            <div class="celebration-intro-stage-loader" aria-hidden="true">
+              <span class="celebration-intro-loader-dot"></span>
+              <span class="celebration-intro-loader-dot"></span>
+              <span class="celebration-intro-loader-dot"></span>
+            </div>
+          </div>
+        </section>
+
+      </article>
+
+    </div>
+  </main>
+
+  <script src="js/celebration-intro.js"></script>
+</body>
+</html>

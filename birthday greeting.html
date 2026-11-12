@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Sathya! — Sathya's Birthday</title>
+
+  <!-- Typography: Vintage romantic cursive handwriting & warm readable serif/sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Dancing+Script:wght@600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/birthday-greeting.css">
+</head>
+<body class="birthday-greeting-body">
+
+  <!-- Scrapbook Global Background Layer -->
+  <div class="birthday-greeting-bg-layer" aria-hidden="true"></div>
+
+  <!-- Ambient Floating Particles (Hearts & Sparkles) -->
+  <div class="birthday-greeting-ambient-particles" aria-hidden="true">
+    <span class="birthday-greeting-ambient-item ah-1">♡</span>
+    <span class="birthday-greeting-ambient-item ah-2">❤</span>
+    <span class="birthday-greeting-ambient-item ah-3">♡</span>
+    <span class="birthday-greeting-ambient-item ah-4">❤</span>
+    <span class="birthday-greeting-ambient-item as-1">✦</span>
+    <span class="birthday-greeting-ambient-item as-2">✨</span>
+    <span class="birthday-greeting-ambient-item as-3">⋆</span>
+  </div>
+
+  <!-- Reusable Fixed Top-Left Background Music Player -->
+  <aside class="birthday-greeting-music-player" id="birthday-greeting-music-player" aria-label="Background music controls">
+    <button class="birthday-greeting-music-btn" id="birthday-greeting-music-btn" type="button" aria-label="Play background music" aria-pressed="false">
+      <div class="birthday-greeting-music-disc" aria-hidden="true">
+        <span class="birthday-greeting-music-note">♪</span>
+      </div>
+      <span class="birthday-greeting-music-indicator" aria-hidden="true">
+        <svg class="birthday-greeting-music-indicator-icon birthday-greeting-indicator-play" viewBox="0 0 10 10">
+          <polygon points="2.5,1.5 8.5,5 2.5,8.5" />
+        </svg>
+        <svg class="birthday-greeting-music-indicator-icon birthday-greeting-indicator-pause" viewBox="0 0 10 10">
+          <rect x="2" y="1.5" width="2" height="7" rx="0.5" />
+          <rect x="6" y="1.5" width="2" height="7" rx="0.5" />
+        </svg>
+      </span>
+    </button>
+    <span class="birthday-greeting-music-tooltip">Music ♪</span>
+    <audio id="birthday-greeting-audio" preload="auto" loop>
+      <source src="assets/music/birthday-song.mp3" type="audio/mpeg">
+      <source src="assets/music/birthday-song.wav" type="audio/wav">
+    </audio>
+  </aside>
+
+  <main class="birthday-greeting-main">
+    <div class="birthday-greeting-container">
+
+      <!-- Cream Torn-Paper Scrapbook Birthday Card -->
+      <article class="birthday-greeting-card" id="birthday-greeting-card" aria-label="Birthday greeting card for Sathya">
+        
+        <!-- Washi Tape Strips -->
+        <div class="birthday-greeting-tape birthday-greeting-tape-tl" aria-hidden="true"></div>
+        <div class="birthday-greeting-tape birthday-greeting-tape-tr" aria-hidden="true"></div>
+        <div class="birthday-greeting-tape birthday-greeting-tape-bl" aria-hidden="true"></div>
+
+        <!-- Hand-Drawn Doodle Hearts -->
+        <span class="birthday-greeting-doodle-heart dh-1" aria-hidden="true">♡</span>
+        <span class="birthday-greeting-doodle-heart dh-2" aria-hidden="true">♡</span>
+        <span class="birthday-greeting-doodle-heart dh-3" aria-hidden="true">♡</span>
+        <span class="birthday-greeting-doodle-heart dh-4" aria-hidden="true">♡</span>
+
+        <!-- Radiant Accent Sparkles -->
+        <span class="birthday-greeting-radiant-tl" aria-hidden="true">彡</span>
+        <span class="birthday-greeting-radiant-tr" aria-hidden="true">ミ</span>
+
+        <!-- Small Heading on Washi Tape Banner -->
+        <div class="birthday-greeting-banner-wrap">
+          <span class="birthday-greeting-small-heading">YOU UNLOCKED SOMETHING SPECIAL!</span>
+        </div>
+
+        <!-- Main Heading: "HAPPY BIRTHDAY, SATHYA!" -->
+        <div class="birthday-greeting-heading-wrap">
+          <h1 class="birthday-greeting-main-heading">HAPPY BIRTHDAY, SATHYA!</h1>
+          <div class="birthday-greeting-heading-flourish" aria-hidden="true"></div>
+        </div>
+
+        <!-- Large Polaroid-Style Photo Frame with Corner Stickers -->
+        <div class="birthday-greeting-polaroid-wrap">
+          
+          <!-- Polaroid Photo Card -->
+          <div class="birthday-greeting-polaroid">
+            <!-- Washi Tape at Top of Photo -->
+            <div class="birthday-greeting-photo-tape" aria-hidden="true"></div>
+
+            <!-- Replaceable Birthday Photo Placeholder -->
+            <div class="birthday-greeting-photo-inner">
+              <img 
+                src="assets/photos/sathya-birthday-photo.webp" 
+                alt="Sathya's birthday celebration photo" 
+                class="birthday-greeting-photo"
+                draggable="false"
+              />
+            </div>
+          </div>
+
+          <!-- Mini Envelope Sticker (Left) -->
+          <img 
+            src="assets/stickers/mini-envelope.webp" 
+            alt="" 
+            class="birthday-greeting-sticker-envelope" 
+            aria-hidden="true" 
+            draggable="false"
+          />
+
+          <!-- Birthday Cake Postage Stamp (Right) -->
+          <img 
+            src="assets/stickers/cake-stamp.webp" 
+            alt="" 
+            class="birthday-greeting-sticker-stamp" 
+            aria-hidden="true" 
+            draggable="false"
+          />
+
+          <!-- Sunflower & Baby's Breath Sticker (Bottom-Left) -->
+          <img 
+            src="assets/stickers/sunflower-sticker.webp" 
+            alt="" 
+            class="birthday-greeting-sticker-sunflower" 
+            aria-hidden="true" 
+            draggable="false"
+          />
+
+          <!-- Red Satin Ribbon Bow (Bottom-Right) -->
+          <img 
+            src="assets/stickers/red-bow.webp" 
+            alt="" 
+            class="birthday-greeting-sticker-bow" 
+            aria-hidden="true" 
+            draggable="false"
+          />
+
+        </div>
+
+        <!-- Personal Birthday Note Sub-Card -->
+        <section class="birthday-greeting-note-card" aria-label="Birthday message">
+          <p class="birthday-greeting-note-text">
+            Today is all about you. I hope your day is filled with happiness, little surprises and countless reasons to smile. <span class="birthday-greeting-heart-symbol" aria-hidden="true">🤍</span>
+          </p>
+        </section>
+
+        <!-- Call to Action Continue Button -->
+        <div class="birthday-greeting-cta-wrap">
+          <div class="birthday-greeting-cta-rays birthday-greeting-cta-rays-left" aria-hidden="true">
+            <span class="birthday-greeting-ray"></span>
+            <span class="birthday-greeting-ray"></span>
+            <span class="birthday-greeting-ray"></span>
+          </div>
+
+          <button class="birthday-greeting-continue-btn" id="birthday-greeting-continue-btn" type="button" aria-label="Continue to next birthday section">
+            CONTINUE &rarr;
+          </button>
+
+          <div class="birthday-greeting-cta-rays birthday-greeting-cta-rays-right" aria-hidden="true">
+            <span class="birthday-greeting-ray"></span>
+            <span class="birthday-greeting-ray"></span>
+            <span class="birthday-greeting-ray"></span>
+          </div>
+        </div>
+
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Friendly Toast Message for Future Integration -->
+  <div class="birthday-greeting-toast" id="birthday-greeting-toast" role="status" aria-live="polite"></div>
+
+  <script src="js/birthday-greeting.js"></script>
+</body>
+</html>
+

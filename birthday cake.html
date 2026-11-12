@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#8b0d11">
+  <title>Sathya's Birthday — Make a Wish & Cut the Cake!</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/birthday-cake.css">
+</head>
+<body class="birthday-cake-body">
+
+  <!-- Confetti Canvas & Ambient Particles -->
+  <div class="birthday-cake-ambient-container" id="birthday-cake-ambient" aria-hidden="true">
+    <canvas id="birthday-cake-confetti-canvas" class="birthday-cake-confetti-canvas"></canvas>
+  </div>
+
+  <!-- Reusable Background Music Player (Fixed Top-Left) -->
+  <aside class="birthday-cake-music-player" id="birthday-cake-music-player" aria-label="Background music controls">
+    <button 
+      type="button" 
+      class="birthday-cake-music-btn" 
+      id="birthday-cake-music-btn" 
+      aria-label="Toggle background music"
+      aria-pressed="false"
+    >
+      <div class="birthday-cake-music-disc" aria-hidden="true">
+        <span class="birthday-cake-music-note">♪</span>
+      </div>
+      <span class="birthday-cake-music-indicator" aria-hidden="true">
+        <svg class="birthday-cake-music-indicator-icon birthday-cake-indicator-play" viewBox="0 0 10 10">
+          <polygon points="2.5,1.5 8.5,5 2.5,8.5" />
+        </svg>
+        <svg class="birthday-cake-music-indicator-icon birthday-cake-indicator-pause" viewBox="0 0 10 10">
+          <rect x="2" y="1.5" width="2" height="7" rx="0.5" />
+          <rect x="6" y="1.5" width="2" height="7" rx="0.5" />
+        </svg>
+      </span>
+    </button>
+    <span class="birthday-cake-music-tooltip">Music ♪</span>
+    <audio id="birthday-cake-audio" preload="auto" loop>
+      <source src="assets/music/birthday-song.mp3" type="audio/mpeg">
+      <source src="assets/music/birthday-song.wav" type="audio/wav">
+    </audio>
+  </aside>
+
+  <!-- Main Scrapbook Composition -->
+  <main class="birthday-cake-main" id="birthday-cake-main">
+    <div class="birthday-cake-container">
+
+      <!-- Cream Torn-Paper Card -->
+      <article class="birthday-cake-card" id="birthday-cake-card" aria-label="Interactive birthday cake card">
+        
+        <!-- Masking Tape Centered at Top Edge -->
+        <div class="birthday-cake-tape" aria-hidden="true"></div>
+
+        <!-- Scrapbook Doodles: Hand-drawn hearts and golden sparkles -->
+        <div class="birthday-cake-doodles" aria-hidden="true">
+          <span class="birthday-cake-doodle birthday-cake-doodle-1">♡</span>
+          <span class="birthday-cake-doodle birthday-cake-doodle-2">✨</span>
+          <span class="birthday-cake-doodle birthday-cake-doodle-3">✦</span>
+          <span class="birthday-cake-doodle birthday-cake-doodle-4">♥</span>
+        </div>
+
+        <!-- ================= STAGE 1 & 2: BLOW THE CANDLES ================= -->
+        <section class="birthday-cake-stage birthday-cake-stage-active" id="birthday-cake-stage-candles" aria-labelledby="birthday-cake-heading">
+          
+          <h1 class="birthday-cake-heading" id="birthday-cake-heading">
+            Your birthday cake is finally here!
+          </h1>
+          <p class="birthday-cake-subtext" id="birthday-cake-subtext">
+            Make a wish, Sathya, and blow the candles! 🤍
+          </p>
+
+          <!-- Interactive Birthday Cake with 5 Candles -->
+          <div class="birthday-cake-visual-wrap" id="birthday-cake-visual-wrap">
+            <div class="birthday-cake-shadow" aria-hidden="true"></div>
+            
+            <img 
+              src="assets/characters/birthday-cake.webp" 
+              alt="Delicious strawberry-and-cream birthday cake with fresh strawberries" 
+              class="birthday-cake-img" 
+              id="birthday-cake-img"
+              draggable="false"
+            />
+
+            <!-- Five Lit Candles Overlaid on Top of the Cake -->
+            <div class="birthday-cake-candles-row" id="birthday-cake-candles-row" role="region" aria-label="Five birthday candles">
+              
+              <!-- Candle 1 -->
+              <div class="birthday-cake-candle birthday-cake-candle-1" id="candle-1" role="button" tabindex="0" aria-label="Candle 1: Lit. Tap to blow out.">
+                <div class="birthday-cake-flame" aria-hidden="true">
+                  <div class="birthday-cake-flame-inner"></div>
+                  <div class="birthday-cake-flame-glow"></div>
+                </div>
+                <div class="birthday-cake-smoke" aria-hidden="true"></div>
+                <div class="birthday-cake-wick"></div>
+                <div class="birthday-cake-wax birthday-cake-wax-pink"></div>
+              </div>
+
+              <!-- Candle 2 -->
+              <div class="birthday-cake-candle birthday-cake-candle-2" id="candle-2" role="button" tabindex="0" aria-label="Candle 2: Lit. Tap to blow out.">
+                <div class="birthday-cake-flame" aria-hidden="true">
+                  <div class="birthday-cake-flame-inner"></div>
+                  <div class="birthday-cake-flame-glow"></div>
+                </div>
+                <div class="birthday-cake-smoke" aria-hidden="true"></div>
+                <div class="birthday-cake-wick"></div>
+                <div class="birthday-cake-wax birthday-cake-wax-gold"></div>
+              </div>
+
+              <!-- Candle 3 (Center) -->
+              <div class="birthday-cake-candle birthday-cake-candle-3" id="candle-3" role="button" tabindex="0" aria-label="Candle 3: Lit. Tap to blow out.">
+                <div class="birthday-cake-flame" aria-hidden="true">
+                  <div class="birthday-cake-flame-inner"></div>
+                  <div class="birthday-cake-flame-glow"></div>
+                </div>
+                <div class="birthday-cake-smoke" aria-hidden="true"></div>
+                <div class="birthday-cake-wick"></div>
+                <div class="birthday-cake-wax birthday-cake-wax-rose"></div>
+              </div>
+
+              <!-- Candle 4 -->
+              <div class="birthday-cake-candle birthday-cake-candle-4" id="candle-4" role="button" tabindex="0" aria-label="Candle 4: Lit. Tap to blow out.">
+                <div class="birthday-cake-flame" aria-hidden="true">
+                  <div class="birthday-cake-flame-inner"></div>
+                  <div class="birthday-cake-flame-glow"></div>
+                </div>
+                <div class="birthday-cake-smoke" aria-hidden="true"></div>
+                <div class="birthday-cake-wick"></div>
+                <div class="birthday-cake-wax birthday-cake-wax-gold"></div>
+              </div>
+
+              <!-- Candle 5 -->
+              <div class="birthday-cake-candle birthday-cake-candle-5" id="candle-5" role="button" tabindex="0" aria-label="Candle 5: Lit. Tap to blow out.">
+                <div class="birthday-cake-flame" aria-hidden="true">
+                  <div class="birthday-cake-flame-inner"></div>
+                  <div class="birthday-cake-flame-glow"></div>
+                </div>
+                <div class="birthday-cake-smoke" aria-hidden="true"></div>
+                <div class="birthday-cake-wick"></div>
+                <div class="birthday-cake-wax birthday-cake-wax-pink"></div>
+              </div>
+
+            </div>
+
+            <!-- Warm Candlelight Ambient Glow -->
+            <div class="birthday-cake-ambient-glow" id="birthday-cake-ambient-glow" aria-hidden="true"></div>
+          </div>
+
+          <!-- Interaction Controls (Mic + Tap Fallbacks) -->
+          <div class="birthday-cake-controls-group" id="birthday-cake-controls">
+            <button 
+              type="button" 
+              class="birthday-cake-btn birthday-cake-btn-mic" 
+              id="birthday-cake-mic-btn"
+              aria-label="Blow candles with microphone"
+            >
+              <span class="birthday-cake-btn-icon">🎙️</span>
+              <span class="birthday-cake-btn-text">BLOW VIA MIC</span>
+            </button>
+
+            <button 
+              type="button" 
+              class="birthday-cake-btn birthday-cake-btn-secondary" 
+              id="birthday-cake-tap-btn"
+              aria-label="Tap to blow the candles"
+            >
+              <span class="birthday-cake-btn-icon">💨</span>
+              <span class="birthday-cake-btn-text">TAP TO BLOW THE CANDLES</span>
+            </button>
+          </div>
+
+          <!-- Status / Feedback Toast Banner -->
+          <div class="birthday-cake-feedback-banner" id="birthday-cake-feedback" aria-live="polite">
+            <span class="birthday-cake-feedback-text">Tap the candles or use your mic to blow! ✨</span>
+          </div>
+
+          <!-- Post-Blowing Celebration Card -->
+          <div class="birthday-cake-success-card" id="birthday-cake-success" aria-hidden="true">
+            <div class="birthday-cake-success-badge">Wish made! ✨</div>
+            <p class="birthday-cake-success-note">Every candle blew out with your secret wish in the air! 🤍</p>
+          </div>
+
+        </section>
+
+
+        <!-- ================= STAGE 3: CUT THE CAKE ================= -->
+        <section class="birthday-cake-stage" id="birthday-cake-stage-cut" aria-labelledby="birthday-cake-cut-heading" aria-hidden="true">
+          
+          <h2 class="birthday-cake-heading" id="birthday-cake-cut-heading">
+            Now let's cut your birthday cake!
+          </h2>
+          <p class="birthday-cake-subtext" id="birthday-cake-cut-subtext">
+            Swipe along the curve or click the button to slice it! 🍰
+          </p>
+
+          <!-- Interactive Cutting Area -->
+          <div class="birthday-cake-cut-area" id="birthday-cake-cut-area">
+            <div class="birthday-cake-shadow" aria-hidden="true"></div>
+
+            <!-- Whole / Sliced Cake Presentation -->
+            <div class="birthday-cake-cut-composition" id="birthday-cake-cut-comp">
+              <img 
+                src="assets/characters/birthday-cake.webp" 
+                alt="Birthday cake ready for cutting" 
+                class="birthday-cake-img birthday-cake-cut-main-img" 
+                id="birthday-cake-cut-img"
+                draggable="false"
+              />
+              <!-- Sliced Wedge Portion (Animated Outwards Upon Cut) -->
+              <div class="birthday-cake-wedge" id="birthday-cake-wedge" aria-hidden="true">
+                <img 
+                  src="assets/characters/birthday-cake-slice.webp" 
+                  alt="" 
+                  class="birthday-cake-wedge-img" 
+                  draggable="false"
+                />
+              </div>
+            </div>
+
+            <!-- Swipe Guide / Realistic Knife Cut Overlay -->
+            <div class="birthday-cake-cut-guide" id="birthday-cake-cut-guide" aria-hidden="true">
+              <!-- S-shaped Curved Cutting Path -->
+              <svg class="birthday-cake-cut-svg" id="birthday-cake-cut-svg" viewBox="0 0 300 300" preserveAspectRatio="none">
+                <path 
+                  id="birthday-cake-cut-path" 
+                  class="birthday-cake-cut-path" 
+                  d="M 150 32 C 215 95, 85 180, 150 258" 
+                />
+              </svg>
+
+              <!-- Cute Realistic Miniature Cake Knife -->
+              <div class="birthday-cake-knife-wrap" id="birthday-cake-knife-wrap">
+                <svg class="birthday-cake-knife-svg" id="birthday-cake-knife-svg" viewBox="0 0 170 42" width="130" height="32" fill="none">
+                  <defs>
+                    <linearGradient id="cakeKnifeBlade" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" />
+                      <stop offset="20%" stop-color="#f1f5f9" />
+                      <stop offset="55%" stop-color="#cbd5e1" />
+                      <stop offset="85%" stop-color="#94a3b8" />
+                      <stop offset="100%" stop-color="#64748b" />
+                    </linearGradient>
+                    <linearGradient id="cakeKnifeBevel" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+                      <stop offset="40%" stop-color="#e2e8f0" stop-opacity="0.75" />
+                      <stop offset="100%" stop-color="#94a3b8" stop-opacity="0.4" />
+                    </linearGradient>
+                    <linearGradient id="cakeKnifeSpine" x1="0%" y1="50%" x2="100%" y2="50%">
+                      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+                      <stop offset="50%" stop-color="#f8fafc" stop-opacity="0.7" />
+                      <stop offset="100%" stop-color="#cbd5e1" stop-opacity="0.2" />
+                    </linearGradient>
+                    <linearGradient id="cakeKnifeBolster" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#f8fafc" />
+                      <stop offset="30%" stop-color="#cbd5e1" />
+                      <stop offset="70%" stop-color="#64748b" />
+                      <stop offset="100%" stop-color="#334155" />
+                    </linearGradient>
+                    <linearGradient id="cakeKnifeWood" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#9a461c" />
+                      <stop offset="22%" stop-color="#b85d24" />
+                      <stop offset="52%" stop-color="#783311" />
+                      <stop offset="82%" stop-color="#522108" />
+                      <stop offset="100%" stop-color="#2e1003" />
+                    </linearGradient>
+                    <linearGradient id="cakeKnifeWoodHi" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#d97706" stop-opacity="0.4" />
+                      <stop offset="35%" stop-color="#f59e0b" stop-opacity="0.75" />
+                      <stop offset="70%" stop-color="#d97706" stop-opacity="0.5" />
+                      <stop offset="100%" stop-color="#78350f" stop-opacity="0.2" />
+                    </linearGradient>
+                    <radialGradient id="cakeKnifeRivet" cx="35%" cy="35%" r="65%">
+                      <stop offset="0%" stop-color="#fffbeb" />
+                      <stop offset="30%" stop-color="#fef08a" />
+                      <stop offset="65%" stop-color="#d97706" />
+                      <stop offset="100%" stop-color="#78350f" />
+                    </radialGradient>
+                    <filter id="cakeKnifeShadow" x="-15%" y="-30%" width="135%" height="170%">
+                      <feDropShadow dx="0" dy="3.5" stdDeviation="3" flood-color="#240907" flood-opacity="0.38" />
+                    </filter>
+                  </defs>
+                  <g filter="url(#cakeKnifeShadow)">
+                    <!-- Blade Base -->
+                    <path d="M 63 14 L 140 14 C 150 14, 161 17, 163 21 C 161 24, 150 28, 140 28 L 63 28 Z" fill="url(#cakeKnifeBlade)" stroke="#64748b" stroke-width="0.6" stroke-linejoin="round" />
+                    <!-- Blade Bevel / Razor Taper -->
+                    <path d="M 63 21.5 L 140 21.5 C 148 21.5, 157 23.5, 163 21 C 157 25.5, 147 28, 138 28 L 63 28 Z" fill="url(#cakeKnifeBevel)" />
+                    <!-- Blade Spine Specular Line -->
+                    <line x1="64" y1="14.5" x2="142" y2="14.5" stroke="url(#cakeKnifeSpine)" stroke-width="0.8" stroke-linecap="round" />
+                    <!-- Metallic Collar Bolster -->
+                    <rect x="59" y="12.5" width="6" height="17" rx="1.8" fill="url(#cakeKnifeBolster)" stroke="#475569" stroke-width="0.5" />
+                    <line x1="62" y1="13" x2="62" y2="29" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.6" />
+                    <!-- Ergonomic Warm Wooden Handle -->
+                    <path d="M 59 14 C 50 13, 37 12.5, 25 13 C 14 13.5, 7 14, 4 17 C 2 19, 2 23, 4 25 C 7 28, 15 28.5, 26 29 C 38 29.5, 50 29, 59 28 Z" fill="url(#cakeKnifeWood)" stroke="#3b1706" stroke-width="0.8" stroke-linejoin="round" />
+                    <!-- Wood Grain Ridge Highlight -->
+                    <path d="M 8 18 C 16 14.8, 32 14.2, 56 14.8" stroke="url(#cakeKnifeWoodHi)" stroke-width="1.4" stroke-linecap="round" fill="none" />
+                    <!-- Golden Brass Rivet 1 -->
+                    <circle cx="21" cy="21" r="2.2" fill="url(#cakeKnifeRivet)" stroke="#5b2909" stroke-width="0.5" />
+                    <circle cx="20.4" cy="20.4" r="0.6" fill="#ffffff" opacity="0.85" />
+                    <!-- Golden Brass Rivet 2 -->
+                    <circle cx="44" cy="21" r="2.2" fill="url(#cakeKnifeRivet)" stroke="#5b2909" stroke-width="0.5" />
+                    <circle cx="43.4" cy="20.4" r="0.6" fill="#ffffff" opacity="0.85" />
+                  </g>
+                </svg>
+              </div>
+
+              <!-- Backward-compatible hook for legacy script/styling -->
+              <div class="birthday-cake-knife-icon is-hidden" id="birthday-cake-knife-icon" style="display: none;" aria-hidden="true"></div>
+
+              <span class="birthday-cake-cut-hint" id="birthday-cake-cut-hint">Swipe here to cut! 🍰</span>
+            </div>
+
+            <!-- Knife Trail Sparkle Container -->
+            <div class="birthday-cake-sparkle-trail" id="birthday-cake-sparkle-trail" aria-hidden="true"></div>
+          </div>
+
+          <!-- Cut Buttons Group -->
+          <div class="birthday-cake-controls-group" id="birthday-cake-cut-controls">
+            <button 
+              type="button" 
+              class="birthday-cake-btn birthday-cake-btn-primary" 
+              id="birthday-cake-cut-action-btn"
+              aria-label="Cut the birthday cake"
+            >
+              <span class="birthday-cake-btn-icon">
+                <svg width="22" height="15" viewBox="0 0 170 42" fill="none" style="vertical-align: middle; display: inline-block;">
+                  <path d="M 63 14 L 140 14 C 150 14, 161 17, 163 21 C 161 24, 150 28, 140 28 L 63 28 Z" fill="#ffffff" />
+                  <rect x="59" y="12.5" width="6" height="17" rx="1.8" fill="#e2e8f0" />
+                  <path d="M 59 14 C 50 13, 37 12.5, 25 13 C 14 13.5, 7 14, 4 17 C 2 19, 2 23, 4 25 C 7 28, 15 28.5, 26 29 C 38 29.5, 50 29, 59 28 Z" fill="#d97706" />
+                  <circle cx="21" cy="21" r="2.2" fill="#fef08a" />
+                  <circle cx="44" cy="21" r="2.2" fill="#fef08a" />
+                </svg>
+              </span>
+              <span class="birthday-cake-btn-text">CUT THE CAKE ✨</span>
+            </button>
+          </div>
+
+          <!-- Post-Cutting Celebration (Auto-transitions to Slice) -->
+          <div class="birthday-cake-cut-success" id="birthday-cake-cut-success" aria-hidden="true">
+            <div class="birthday-cake-success-badge">Perfect Slice! 🍓</div>
+            <p class="birthday-cake-cut-note">Plating your special slice...</p>
+          </div>
+
+        </section>
+
+
+        <!-- ================= STAGE 4: A SLICE FOR YOU ================= -->
+        <section class="birthday-cake-stage" id="birthday-cake-stage-slice" aria-labelledby="birthday-cake-slice-heading" aria-hidden="true">
+          
+          <h2 class="birthday-cake-heading" id="birthday-cake-slice-heading">
+            A little slice, just for you, Sathya! 🍰
+          </h2>
+          <p class="birthday-cake-subtext">
+            Because someone as sweet as you deserves the sweetest piece. 🤍
+          </p>
+
+          <!-- Featured Slice Presentation -->
+          <div class="birthday-cake-slice-showcase" id="birthday-cake-slice-showcase">
+            <div class="birthday-cake-shadow birthday-cake-slice-shadow" aria-hidden="true"></div>
+            
+            <img 
+              src="assets/characters/birthday-cake-slice.webp" 
+              alt="A delicious slice of strawberry-and-cream birthday cake" 
+              class="birthday-cake-slice-img" 
+              id="birthday-cake-slice-img"
+              draggable="false"
+            />
+
+            <!-- Small Decorative Dessert Fork & Strawberry beside the slice -->
+            <div class="birthday-cake-slice-cutlery" aria-hidden="true">
+              <span class="birthday-cake-slice-fork">🍴</span>
+              <span class="birthday-cake-slice-berry">🍓</span>
+            </div>
+
+            <!-- Floating Sparkle Accents -->
+            <div class="birthday-cake-slice-sparkles" aria-hidden="true">
+              <span class="birthday-cake-slice-sparkle sp-1">✨</span>
+              <span class="birthday-cake-slice-sparkle sp-2">✦</span>
+              <span class="birthday-cake-slice-sparkle sp-3">♡</span>
+              <span class="birthday-cake-slice-sparkle sp-4">✨</span>
+              <span class="birthday-cake-slice-sparkle sp-5">🤍</span>
+            </div>
+          </div>
+
+          <!-- Final Section Continue Button removed for automatic timed navigation to Beautiful Memories -->
+        </section>
+
+      </article>
+
+    </div>
+  </main>
+
+  <script src="js/birthday-cake.js"></script>
+</body>
+</html>
+

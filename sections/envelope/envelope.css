@@ -1,0 +1,664 @@
+/* ==========================================================================
+   SATHYA'S BIRTHDAY WEBSITE — SECTION 01: THE SECRET ENVELOPE
+   Style: Vintage Romantic Scrapbook Collage
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS Reset & Variables
+   -------------------------------------------------------------------------- */
+:root {
+  --envelope-bg-red: #8b0d11;
+  --envelope-cream: #faf3e5;
+  --envelope-cream-dark: #eddcc4;
+  --envelope-crimson: #a81c20;
+  --envelope-crimson-dark: #7b0f12;
+  --envelope-gold-glow: rgba(255, 215, 110, 0.85);
+  --envelope-gold-light: rgba(255, 235, 160, 0.95);
+  --envelope-ink: #3b2219;
+  --envelope-ink-light: #5d392b;
+  --envelope-font-heading: 'Caveat', 'Dancing Script', cursive;
+  --envelope-font-body: 'Lora', 'Georgia', serif;
+  --envelope-font-cta: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --envelope-ease-paper: cubic-bezier(0.16, 1, 0.3, 1);
+  --envelope-ease-flap: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--envelope-bg-red);
+}
+
+.envelope-body {
+  font-family: var(--envelope-font-body);
+  color: var(--envelope-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.envelope-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   2. Viewport Layout (100svh / 100vh) & Centering
+   -------------------------------------------------------------------------- */
+.envelope-main {
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--envelope-bg-red);
+}
+
+.envelope-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. Responsive Composition Container
+      - max-width: 1200px
+      - Aspect ratio: 1671 / 941 (matches approved reference image)
+      - Centered horizontally and vertically
+      - Preserves full composition without clipping
+   -------------------------------------------------------------------------- */
+.envelope-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  aspect-ratio: 1671 / 941;
+  max-height: 96svh;
+  max-height: 96vh;
+  margin: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  perspective: 1400px;
+}
+
+/* Layer 1: Envelope Back Body — Single Full Composition Image (Hero Artwork) */
+.envelope-hero-bg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  z-index: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 12px 36px rgba(45, 5, 8, 0.45));
+}
+
+/* Golden Interior Light Burst & Star Sparkles (Behind letter, z-index: 2) */
+.envelope-glow-burst {
+  position: absolute;
+  left: 49.8%;
+  top: 32%;
+  width: 44%;
+  height: 44%;
+  transform: translate(-50%, -50%) scale(0.7);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.8s ease, transform 1s var(--envelope-ease-paper);
+}
+
+.envelope-container.is-open .envelope-glow-burst {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  transition-delay: 0.3s;
+}
+
+.envelope-glow-core {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 65%,
+    var(--envelope-gold-light) 0%,
+    var(--envelope-gold-glow) 35%,
+    rgba(255, 175, 45, 0.45) 55%,
+    rgba(220, 80, 20, 0) 80%
+  );
+  filter: blur(14px);
+  border-radius: 50%;
+  animation: envelope-glow-pulse 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes envelope-glow-pulse {
+  0% { transform: scale(0.96); opacity: 0.85; }
+  100% { transform: scale(1.05); opacity: 1; }
+}
+
+/* Floating star sparkles */
+.envelope-sparkle {
+  position: absolute;
+  color: #fff9d8;
+  font-size: clamp(0.75rem, 1.2vw, 1.35rem);
+  text-shadow: 0 0 8px #ffdf79, 0 0 16px #ffbe3b;
+  opacity: 0;
+  animation: envelope-sparkle-float 3s ease-in-out infinite;
+}
+
+.envelope-container.is-open .envelope-sparkle {
+  opacity: 0.95;
+}
+
+.sp-1 { top: 12%; left: 30%; animation-delay: 0.2s; }
+.sp-2 { top: 6%;  left: 50%; font-size: clamp(0.9rem, 1.5vw, 1.6rem); animation-delay: 0.5s; }
+.sp-3 { top: 14%; left: 70%; animation-delay: 0.8s; }
+.sp-4 { top: 25%; left: 24%; font-size: clamp(0.65rem, 1vw, 1rem); animation-delay: 1.3s; }
+.sp-5 { top: 22%; left: 76%; animation-delay: 1.0s; }
+.sp-6 { top: 3%;  left: 62%; animation-delay: 1.7s; }
+
+@keyframes envelope-sparkle-float {
+  0%, 100% { transform: translateY(0) scale(0.85); opacity: 0.55; }
+  50% { transform: translateY(-8px) scale(1.15); opacity: 1; }
+}
+
+/* Open Flap Peak Layer (Inside top flare revealed when flap opens) */
+.envelope-open-peak {
+  position: absolute;
+  left: 28%;
+  top: 4%;
+  width: 44%;
+  height: 32%;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+  transition: opacity 0.5s ease, transform 0.6s var(--envelope-ease-paper);
+  pointer-events: none;
+}
+
+.envelope-container.is-open .envelope-open-peak {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition-delay: 0.38s;
+}
+
+.envelope-open-peak-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   4. Layer 2: The Personal Letter Card
+      - Stacking: Positioned inside envelope (z-index: 2)
+      - Behind the front pocket (z-index: 3)
+      - Slides upwards using transform: translateY()
+      - Height adapts to content
+      - Full heading, body, and button remain visible above pocket
+   -------------------------------------------------------------------------- */
+.envelope-letter {
+  position: absolute;
+  left: 49.8%;
+  top: 48%; /* Rest position inside the envelope pocket */
+  width: clamp(270px, 31vw, 375px);
+  height: auto;
+  min-height: unset;
+  
+  /* Initial hidden state inside pocket: translated down */
+  transform: translate(-50%, 0) translateY(12%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2; /* Stacking Layer 2: Between back body and front pocket */
+  
+  background: #fbf5e7;
+  background-image: 
+    radial-gradient(ellipse at top left, rgba(255, 255, 255, 0.7) 0%, transparent 60%),
+    linear-gradient(135deg, #fdf9ee 0%, #faf3e2 50%, #f4ebd3 100%);
+  border-radius: 6px;
+  padding: clamp(1.4rem, 2.4vw, 2rem) clamp(1.2rem, 2vw, 1.8rem) clamp(1.1rem, 1.8vw, 1.6rem) clamp(1.2rem, 2vw, 1.8rem);
+  filter: url(#envelope-deckle-filter) drop-shadow(0 14px 32px rgba(35, 6, 6, 0.38));
+  box-shadow: 
+    0 12px 28px rgba(35, 5, 5, 0.3),
+    0 2px 6px rgba(0, 0, 0, 0.12),
+    inset 0 0 22px rgba(215, 185, 140, 0.32);
+  
+  transition: 
+    transform 1.05s var(--envelope-ease-paper),
+    opacity 0.4s ease;
+}
+
+/* Open State: slides upwards smoothly using transform: translateY() */
+.envelope-container.is-open .envelope-letter {
+  transform: translate(-50%, 0) translateY(-84%) rotate(-1deg);
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 0.36s; /* Waits briefly for flap to open */
+}
+
+/* Exit State: when "OPEN YOUR GIFT" is clicked */
+.envelope-container.is-exiting .envelope-letter {
+  transform: translate(-50%, 0) translateY(-175%) rotate(-3deg);
+  opacity: 0;
+  pointer-events: none;
+  transition: 
+    transform 0.85s var(--envelope-ease-flap),
+    opacity 0.6s ease;
+}
+
+/* Brass Binder Clip clamped to top center */
+.envelope-letter-clip {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(42px, 4.5vw, 54px);
+  aspect-ratio: 70 / 75;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.envelope-clip-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Hand-drawn heart doodle at top right of letter */
+.envelope-letter-heart {
+  position: absolute;
+  top: clamp(0.75rem, 1.5vw, 1.25rem);
+  right: clamp(0.75rem, 1.5vw, 1.25rem);
+  width: clamp(20px, 2.2vw, 26px);
+  aspect-ratio: 1;
+  opacity: 0.85;
+}
+
+.envelope-heart-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Pressed Botanical Yellow Wildflower Sticker on left */
+.envelope-letter-flower {
+  position: absolute;
+  top: clamp(1.8rem, 3.2vw, 2.8rem);
+  left: clamp(0.6rem, 1vw, 1rem);
+  width: clamp(40px, 4.2vw, 58px);
+  aspect-ratio: 70 / 130;
+  pointer-events: none;
+  transform: rotate(-3deg);
+  opacity: 0.95;
+  filter: drop-shadow(0 2px 4px rgba(60, 30, 10, 0.18));
+}
+
+.envelope-flower-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Letter Content Layout */
+.envelope-letter-body-wrap {
+  position: relative;
+  padding-left: clamp(2.4rem, 4.2vw, 3.4rem);
+  text-align: center;
+}
+
+.envelope-letter-heading {
+  font-family: var(--envelope-font-heading);
+  font-size: clamp(1.15rem, 2vw, 1.62rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: #4a2215;
+  margin-bottom: 0.2rem;
+  letter-spacing: 0.01em;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+.envelope-letter-flourish {
+  width: clamp(55px, 8vw, 85px);
+  height: 2.5px;
+  margin: 0.25rem auto 0.75rem auto;
+  background: radial-gradient(ellipse at center, #8a4832 0%, rgba(138, 72, 50, 0) 80%);
+  border-radius: 2px;
+}
+
+.envelope-letter-text {
+  font-family: var(--envelope-font-body);
+  font-size: clamp(0.8rem, 1.15vw, 1.02rem);
+  font-weight: 500;
+  line-height: 1.6;
+  color: #3b2219;
+  margin-bottom: clamp(0.9rem, 1.6vw, 1.35rem);
+}
+
+.envelope-heart-symbol {
+  display: inline-block;
+  font-size: 1.1em;
+  transform: translateY(1px);
+}
+
+/* Call to Action Button Wrapper */
+.envelope-letter-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  padding-left: clamp(1.2rem, 2.5vw, 2rem);
+}
+
+/* Flanking radiant accent rays `\ | /` */
+.envelope-cta-rays {
+  display: flex;
+  gap: 2.5px;
+  align-items: center;
+  opacity: 0.85;
+}
+
+.envelope-ray {
+  display: block;
+  width: clamp(1.5px, 0.25vw, 2.5px);
+  height: clamp(8px, 1.2vw, 13px);
+  background-color: #6d402f;
+  border-radius: 2px;
+}
+
+.envelope-cta-rays-left .envelope-ray:nth-child(1) { transform: rotate(-25deg); height: clamp(7px, 1vw, 10px); }
+.envelope-cta-rays-left .envelope-ray:nth-child(2) { transform: rotate(-10deg); height: clamp(9px, 1.3vw, 14px); }
+.envelope-cta-rays-left .envelope-ray:nth-child(3) { transform: rotate(10deg); height: clamp(8px, 1.1vw, 11px); }
+
+.envelope-cta-rays-right .envelope-ray:nth-child(1) { transform: rotate(-10deg); height: clamp(8px, 1.1vw, 11px); }
+.envelope-cta-rays-right .envelope-ray:nth-child(2) { transform: rotate(10deg); height: clamp(9px, 1.3vw, 14px); }
+.envelope-cta-rays-right .envelope-ray:nth-child(3) { transform: rotate(25deg); height: clamp(7px, 1vw, 10px); }
+
+/* The "OPEN YOUR GIFT →" button */
+.envelope-gift-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.5rem, 0.95vw, 0.78rem) clamp(1rem, 2vw, 1.7rem);
+  background: linear-gradient(180deg, #c72a2e 0%, #9e171b 100%);
+  border: 1px solid rgba(255, 210, 210, 0.4);
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 
+    0 4px 14px rgba(135, 15, 20, 0.45),
+    0 2px 4px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  overflow: hidden;
+}
+
+.envelope-gift-btn-label {
+  font-family: var(--envelope-font-cta);
+  font-size: clamp(0.68rem, 1.05vw, 0.92rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(45, 5, 5, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.envelope-gift-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 
+    0 8px 20px rgba(145, 18, 24, 0.55),
+    0 3px 6px rgba(0, 0, 0, 0.28),
+    inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  filter: brightness(1.05);
+}
+
+.envelope-gift-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.envelope-gift-btn:focus-visible {
+  outline: 3px solid #ffde6b;
+  outline-offset: 4px;
+}
+
+/* Subtle button sweep */
+.envelope-gift-btn-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  transition: left 0.75s ease;
+}
+
+.envelope-gift-btn:hover .envelope-gift-btn-glow {
+  left: 140%;
+}
+
+/* --------------------------------------------------------------------------
+   5. Layer 3: Envelope Front Pocket & Hands
+      - Stacking: z-index: 3 (Overlays the lower portion of the letter)
+      - The lower edge of the letter remains naturally tucked behind this
+   -------------------------------------------------------------------------- */
+.envelope-front-pocket {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3; /* Stacking Layer 3: Overlays lower portion of letter */
+  pointer-events: none;
+  opacity: 0;
+}
+
+.envelope-container.is-open .envelope-front-pocket {
+  opacity: 1;
+  transition: opacity 0.25s ease 0.25s;
+}
+
+.envelope-front-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   6. Layer 4: Envelope Flap (3D CSS RotateX Fold)
+      - Stacking: z-index: 4 (Sits above the letter and pocket when closed)
+      - Opens smoothly in 3D perspective
+   -------------------------------------------------------------------------- */
+.envelope-flap {
+  position: absolute;
+  left: 29.32%;
+  top: 19.66%;
+  width: 39.8%;
+  height: 30.8%;
+  z-index: 4; /* Stacking Layer 4: Above letter and pocket when closed */
+  transform-origin: 50% 18%; /* Top fold hinge line */
+  transform-style: preserve-3d;
+  transition: transform 0.85s var(--envelope-ease-flap), opacity 0.35s ease 0.45s;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.envelope-container.is-animating-flap .envelope-flap {
+  opacity: 1;
+}
+
+.envelope-container.is-open .envelope-flap {
+  transform: rotateX(180deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.envelope-flap-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   7. Layer 5: Play Seal Button
+      - Stacking: z-index: 5 (Sits above the closed envelope)
+      - Pulsing animation, keyboard accessible, clicks to unseal
+   -------------------------------------------------------------------------- */
+.envelope-seal-btn {
+  position: absolute;
+  left: 49.8%;
+  top: 48.9%;
+  width: 9.1%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 5; /* Stacking Layer 5: Topmost interactive element */
+  padding: 0;
+  outline: none;
+  animation: envelope-seal-pulse 3s ease-in-out infinite;
+  transition: transform 0.25s ease, opacity 0.35s ease;
+  touch-action: manipulation;
+}
+
+.envelope-seal-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  transition: transform 0.25s ease;
+}
+
+/* Subtle breathing pulsing animation on seal */
+@keyframes envelope-seal-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 2px 10px rgba(180, 20, 20, 0.4));
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.06);
+    filter: drop-shadow(0 4px 18px rgba(220, 30, 30, 0.7)) drop-shadow(0 0 12px rgba(255, 215, 110, 0.5));
+  }
+}
+
+/* Hover scale effect */
+.envelope-seal-btn:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  animation-play-state: paused;
+}
+
+.envelope-seal-btn:hover .envelope-seal-img {
+  filter: brightness(1.08);
+}
+
+/* Keyboard accessibility focus ring */
+.envelope-seal-btn:focus-visible {
+  outline: 3px solid #ffe177;
+  outline-offset: 4px;
+  animation-play-state: paused;
+}
+
+/* Seal unseals / pops when clicked */
+.envelope-seal-btn.is-popping {
+  animation: envelope-seal-pop 0.42s ease-out forwards;
+}
+
+@keyframes envelope-seal-pop {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  40% {
+    transform: translate(-50%, -50%) scale(0.92) rotate(-6deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.18) rotate(4deg);
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.envelope-container.is-open .envelope-seal-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   8. Responsive Adjustments
+   -------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  .envelope-letter {
+    width: clamp(240px, 42vw, 320px);
+    padding: clamp(1.1rem, 2vw, 1.5rem) clamp(0.9rem, 1.6vw, 1.3rem) clamp(0.9rem, 1.5vw, 1.3rem) clamp(0.9rem, 1.6vw, 1.3rem);
+  }
+
+  .envelope-letter-body-wrap {
+    padding-left: clamp(1.8rem, 3.5vw, 2.6rem);
+  }
+
+  .envelope-letter-cta {
+    padding-left: 0;
+  }
+
+  .envelope-container.is-open .envelope-letter {
+    transform: translate(-50%, 0) translateY(-86%) rotate(-1deg);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. Accessibility: Respects prefers-reduced-motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .envelope-seal-btn,
+  .envelope-sparkle,
+  .envelope-glow-core,
+  .envelope-gift-btn-glow {
+    animation: none !important;
+  }
+
+  .envelope-flap,
+  .envelope-letter,
+  .envelope-open-peak,
+  .envelope-glow-burst,
+  .envelope-gift-btn {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+
+  .envelope-container.is-open .envelope-letter {
+    transform: translate(-50%, 0) translateY(-84%) !important;
+  }
+
+  .envelope-container.is-exiting .envelope-letter {
+    opacity: 0 !important;
+    transform: translate(-50%, 0) translateY(-84%) !important;
+  }
+}

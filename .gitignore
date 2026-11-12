@@ -1,0 +1,49 @@
+# ==============================================================================
+# Sathya Birthday Website — .gitignore
+# ==============================================================================
+
+# Auto-sync runtime & temporary state files
+scripts/.sync.pid
+scripts/.sync-status.json
+scripts/.sync-paused
+scripts/sync.log
+*.sync-tmp
+
+# OS & System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+desktop.ini
+
+# Editor & IDE directories / swap files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.bak
+*.tmp
+
+# Node / Build caches (if ever added)
+node_modules/
+npm-debug.log*
+.cache/
+
+# Secrets, environment files, keys & credentials (NEVER commit)
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.secret
+credentials.json
+secrets.json
+id_rsa*
+.npmrc
+.netrc

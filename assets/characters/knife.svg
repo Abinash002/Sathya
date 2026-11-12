@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 42" width="170" height="42" fill="none">
+  <defs>
+    <!-- Steel Blade Gradient -->
+    <linearGradient id="knifeBladeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="18%" stop-color="#f1f5f9" />
+      <stop offset="55%" stop-color="#cbd5e1" />
+      <stop offset="85%" stop-color="#94a3b8" />
+      <stop offset="100%" stop-color="#64748b" />
+    </linearGradient>
+
+    <!-- Blade Secondary Grind / Bevel -->
+    <linearGradient id="knifeBevelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="40%" stop-color="#e2e8f0" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#94a3b8" stop-opacity="0.4" />
+    </linearGradient>
+
+    <!-- Spine Specular Shine -->
+    <linearGradient id="knifeSpineGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#f8fafc" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#cbd5e1" stop-opacity="0.2" />
+    </linearGradient>
+
+    <!-- Bolster Collar Metallic -->
+    <linearGradient id="knifeBolsterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc" />
+      <stop offset="30%" stop-color="#cbd5e1" />
+      <stop offset="70%" stop-color="#64748b" />
+      <stop offset="100%" stop-color="#334155" />
+    </linearGradient>
+
+    <!-- Warm Wood Handle -->
+    <linearGradient id="knifeWoodGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#9a461c" />
+      <stop offset="20%" stop-color="#b85d24" />
+      <stop offset="50%" stop-color="#783311" />
+      <stop offset="80%" stop-color="#522108" />
+      <stop offset="100%" stop-color="#2e1003" />
+    </linearGradient>
+
+    <!-- Wood Grain Upper Highlight -->
+    <linearGradient id="knifeWoodHighlight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d97706" stop-opacity="0.4" />
+      <stop offset="35%" stop-color="#f59e0b" stop-opacity="0.7" />
+      <stop offset="70%" stop-color="#d97706" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#78350f" stop-opacity="0.2" />
+    </linearGradient>
+
+    <!-- Golden Brass Rivets -->
+    <radialGradient id="knifeRivetGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fffbeb" />
+      <stop offset="30%" stop-color="#fef08a" />
+      <stop offset="65%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#78350f" />
+    </radialGradient>
+
+    <!-- Filter Drop Shadow -->
+    <filter id="knifeDropShadow" x="-15%" y="-30%" width="135%" height="170%">
+      <feDropShadow dx="0" dy="3.5" stdDeviation="3" flood-color="#240907" flood-opacity="0.38" />
+    </filter>
+  </defs>
+
+  <g filter="url(#knifeDropShadow)">
+    <!-- BLADE BASE -->
+    <path d="M 63 14 L 140 14 C 150 14, 161 17, 163 21 C 161 24, 150 28, 140 28 L 63 28 Z" 
+          fill="url(#knifeBladeGrad)" stroke="#64748b" stroke-width="0.6" stroke-linejoin="round" />
+
+    <!-- BLADE BEVEL TAPER (SHARP CUTTING EDGE) -->
+    <path d="M 63 21.5 L 140 21.5 C 148 21.5, 157 23.5, 163 21 C 157 25.5, 147 28, 138 28 L 63 28 Z" 
+          fill="url(#knifeBevelGrad)" />
+
+    <!-- BLADE SPINE HIGHLIGHT -->
+    <line x1="64" y1="14.5" x2="142" y2="14.5" stroke="url(#knifeSpineGrad)" stroke-width="0.8" stroke-linecap="round" />
+
+    <!-- METALLIC BOLSTER COLLAR -->
+    <rect x="59" y="12.5" width="6" height="17" rx="1.8" fill="url(#knifeBolsterGrad)" stroke="#475569" stroke-width="0.5" />
+    <line x1="62" y1="13" x2="62" y2="29" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.6" />
+
+    <!-- WOODEN HANDLE (CONTOURED ERGONOMIC SHAPE) -->
+    <path d="M 59 14 
+             C 50 13, 37 12.5, 25 13 
+             C 14 13.5, 7 14, 4 17 
+             C 2 19, 2 23, 4 25 
+             C 7 28, 15 28.5, 26 29 
+             C 38 29.5, 50 29, 59 28 Z" 
+          fill="url(#knifeWoodGrad)" stroke="#3b1706" stroke-width="0.8" stroke-linejoin="round" />
+
+    <!-- WOOD GRAIN HIGHLIGHT RIDGE -->
+    <path d="M 8 18 C 16 14.8, 32 14.2, 56 14.8" stroke="url(#knifeWoodHighlight)" stroke-width="1.4" stroke-linecap="round" fill="none" />
+
+    <!-- GOLDEN RIVET 1 -->
+    <circle cx="21" cy="21" r="2.2" fill="url(#knifeRivetGrad)" stroke="#5b2909" stroke-width="0.5" />
+    <circle cx="20.4" cy="20.4" r="0.6" fill="#ffffff" opacity="0.85" />
+
+    <!-- GOLDEN RIVET 2 -->
+    <circle cx="44" cy="21" r="2.2" fill="url(#knifeRivetGrad)" stroke="#5b2909" stroke-width="0.5" />
+    <circle cx="43.4" cy="20.4" r="0.6" fill="#ffffff" opacity="0.85" />
+  </g>
+</svg>

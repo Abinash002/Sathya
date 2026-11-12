@@ -1,0 +1,787 @@
+/* ==========================================================================
+   SATHYA'S BIRTHDAY WEBSITE - SECTION 06: BEAUTIFUL MEMORIES
+   Style: Full-Length Vertical Scrapbook Polaroid Gallery
+   Class Prefix: beautiful-memories-
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS Custom Properties / Design Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  --beautiful-memories-crimson: #8b0d11;
+  --beautiful-memories-crimson-dark: #5e070a;
+  --beautiful-memories-crimson-soft: #a31821;
+  --beautiful-memories-cream: #fcf8f0;
+  --beautiful-memories-polaroid-bg: #faf6ee;
+  --beautiful-memories-polaroid-border: #e3d5be;
+  --beautiful-memories-parchment: #f7eedf;
+  --beautiful-memories-ink: #481215;
+  --beautiful-memories-ink-soft: #6d2328;
+  --beautiful-memories-ink-muted: #884347;
+  --beautiful-memories-gold: #ffd770;
+  --beautiful-memories-gold-deep: #caa24c;
+  --beautiful-memories-gold-glow: rgba(255, 215, 112, 0.45);
+  --beautiful-memories-gold-bright: #ffea9f;
+  --beautiful-memories-tape: rgba(243, 233, 213, 0.88);
+  --beautiful-memories-tape-gold: rgba(255, 222, 137, 0.85);
+
+  --beautiful-memories-font-hand: 'Caveat', 'Dancing Script', 'Marck Script', cursive;
+  --beautiful-memories-font-display: 'Playfair Display', Georgia, serif;
+  --beautiful-memories-font-serif: 'Cormorant Garamond', Georgia, serif;
+  --beautiful-memories-font-ui: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  --beautiful-memories-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --beautiful-memories-ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Strict Global Scrapbook Background
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body.beautiful-memories-body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: var(--beautiful-memories-font-ui);
+  background-color: var(--beautiful-memories-crimson);
+  /* Approved original desktop scrapbook background */
+  background-image: url('../assets/scrapbook-background.webp');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--beautiful-memories-ink);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Responsive Approved Mobile Background */
+@media (max-width: 768px) {
+  body.beautiful-memories-body {
+    background-image: url('../assets/scrapbook-background-mobile.webp');
+    background-attachment: fixed;
+    background-position: center top;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Ambient Scrapbook Particles
+   -------------------------------------------------------------------------- */
+.beautiful-memories-ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.beautiful-memories-ambient-item {
+  position: absolute;
+  color: rgba(255, 235, 180, 0.45);
+  font-size: 1.25rem;
+  user-select: none;
+  animation: beautiful-memories-float 7s ease-in-out infinite alternate;
+}
+
+.bm-heart-1 { top: 12%; left: 8%; font-size: 1.5rem; animation-duration: 6s; }
+.bm-heart-2 { top: 38%; right: 9%; font-size: 1.8rem; animation-duration: 8s; color: rgba(255, 215, 112, 0.35); }
+.bm-heart-3 { top: 65%; left: 6%; font-size: 1.4rem; animation-duration: 7s; }
+.bm-star-1  { top: 22%; right: 12%; font-size: 1.6rem; animation-duration: 5s; }
+.bm-star-2  { top: 50%; left: 10%; font-size: 1.3rem; animation-duration: 9s; }
+.bm-star-3  { top: 82%; right: 7%; font-size: 1.7rem; animation-duration: 6.5s; }
+.bm-heart-4 { top: 92%; left: 14%; font-size: 1.5rem; animation-duration: 7.5s; }
+
+@keyframes beautiful-memories-float {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+  50% { opacity: 0.6; }
+  100% { transform: translateY(-24px) rotate(12deg); opacity: 0.4; }
+}
+
+/* --------------------------------------------------------------------------
+   4. Reusable Fixed Top-Left Background Music Player
+   -------------------------------------------------------------------------- */
+.beautiful-memories-music-player {
+  position: fixed;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.beautiful-memories-music-btn {
+  appearance: none;
+  width: 48px;
+  height: 48px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fdf8ed 0%, #edd8be 100%);
+  border: 2px solid #caa24c;
+  box-shadow: 
+    0 4px 10px rgba(45, 15, 10, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.2s var(--beautiful-memories-ease-spring), box-shadow 0.2s ease, border-color 0.2s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.beautiful-memories-music-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 
+    0 6px 14px rgba(45, 15, 10, 0.45),
+    0 0 12px var(--beautiful-memories-gold-glow);
+  border-color: #ffd770;
+}
+
+.beautiful-memories-music-btn:active {
+  transform: scale(0.95);
+}
+
+.beautiful-memories-music-btn:focus-visible {
+  outline: 2px solid #ffd770;
+  outline-offset: 3px;
+}
+
+/* Vinyl groove lines & spinning note icon */
+.beautiful-memories-music-disc {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #3b2219;
+  background-image: 
+    radial-gradient(circle, transparent 30%, rgba(255, 215, 110, 0.2) 35%, transparent 40%),
+    radial-gradient(circle, transparent 55%, rgba(255, 215, 110, 0.2) 60%, transparent 65%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.8);
+  transition: transform 0.3s ease;
+}
+
+.beautiful-memories-music-note {
+  font-size: 1.05rem;
+  color: #ffd770;
+  line-height: 1;
+}
+
+/* Playing spinning state */
+.beautiful-memories-music-player.is-playing .beautiful-memories-music-disc {
+  animation: beautiful-memories-music-spin 3s linear infinite;
+}
+
+.beautiful-memories-music-player.is-playing .beautiful-memories-music-btn {
+  border-color: #ffd770;
+  box-shadow: 
+    0 4px 12px rgba(45, 15, 10, 0.4),
+    0 0 16px var(--beautiful-memories-gold-glow);
+}
+
+@keyframes beautiful-memories-music-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Play/Pause tiny badge indicator */
+.beautiful-memories-music-indicator {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--beautiful-memories-crimson);
+  border: 1.5px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.beautiful-memories-music-indicator-icon {
+  width: 7px;
+  height: 7px;
+  fill: #ffffff;
+}
+
+.beautiful-memories-indicator-play { display: block; }
+.beautiful-memories-indicator-pause { display: none; }
+
+.beautiful-memories-music-player.is-playing .beautiful-memories-indicator-play { display: none; }
+.beautiful-memories-music-player.is-playing .beautiful-memories-indicator-pause { display: block; }
+.beautiful-memories-music-player.is-playing .beautiful-memories-music-indicator { background: #a31821; }
+
+.beautiful-memories-music-tooltip {
+  background: rgba(251, 245, 231, 0.95);
+  color: var(--beautiful-memories-ink);
+  font-family: var(--beautiful-memories-font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--beautiful-memories-polaroid-border);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
+
+/* --------------------------------------------------------------------------
+   5. Main Scroll Container & Header
+   -------------------------------------------------------------------------- */
+.beautiful-memories-main {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Top Header Card */
+.beautiful-memories-header {
+  width: 100%;
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.beautiful-memories-header-card {
+  width: 100%;
+  max-width: 620px;
+  background: var(--beautiful-memories-cream);
+  border: 2px solid var(--beautiful-memories-polaroid-border);
+  border-radius: 8px;
+  padding: 2.5rem 2rem 2rem;
+  box-shadow: 
+    0 12px 28px rgba(35, 10, 8, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  position: relative;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(243, 226, 202, 0.4) 0%, transparent 60%),
+    radial-gradient(circle at 90% 80%, rgba(243, 226, 202, 0.4) 0%, transparent 60%);
+}
+
+/* Washi Tape Header Accent */
+.beautiful-memories-tape-header {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 130px;
+  height: 28px;
+  background: var(--beautiful-memories-tape);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border-left: 2px dashed rgba(180, 150, 110, 0.4);
+  border-right: 2px dashed rgba(180, 150, 110, 0.4);
+}
+
+.beautiful-memories-chapter-badge {
+  display: inline-block;
+  background: #f1e3cf;
+  color: var(--beautiful-memories-crimson);
+  font-family: var(--beautiful-memories-font-ui);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid #dac6a8;
+  margin-bottom: 1.25rem;
+}
+
+.beautiful-memories-title {
+  font-family: var(--beautiful-memories-font-serif);
+  font-size: clamp(1.8rem, 4.2vw, 2.5rem);
+  font-weight: 700;
+  color: var(--beautiful-memories-crimson);
+  letter-spacing: 1px;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.beautiful-memories-title-flourish {
+  width: 70px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--beautiful-memories-crimson), transparent);
+  margin: 0.75rem auto 1.25rem;
+}
+
+.beautiful-memories-subtitle {
+  font-family: var(--beautiful-memories-font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--beautiful-memories-ink-soft);
+  max-width: 480px;
+  margin: 0 auto 1.75rem;
+}
+
+/* Scroll Cue */
+.beautiful-memories-scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--beautiful-memories-crimson);
+  margin-top: 1rem;
+}
+
+.beautiful-memories-scroll-text {
+  font-family: var(--beautiful-memories-font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.beautiful-memories-scroll-arrow {
+  font-size: 1.35rem;
+  font-weight: 700;
+  animation: beautiful-memories-bounce 1.8s infinite;
+}
+
+@keyframes beautiful-memories-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* --------------------------------------------------------------------------
+   6. 12 Individual Vertical Photo Sections (One Large Photo at a Time)
+   -------------------------------------------------------------------------- */
+.beautiful-memories-gallery {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5.5rem; /* Generous breathing room between individual photo experiences */
+}
+
+.beautiful-memories-photo-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(45px);
+  transition: opacity 0.85s var(--beautiful-memories-ease-smooth), transform 0.85s var(--beautiful-memories-ease-smooth);
+}
+
+/* Scroll reveal class added by IntersectionObserver */
+.beautiful-memories-photo-section.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Polaroid Card Container */
+.beautiful-memories-polaroid-card {
+  width: 100%;
+  max-width: 540px;
+  background: var(--beautiful-memories-polaroid-bg);
+  border: 1px solid var(--beautiful-memories-polaroid-border);
+  border-radius: 4px;
+  padding: 1.15rem 1.15rem 2.25rem 1.15rem; /* Authentic Polaroid proportions with generous bottom margin */
+  box-shadow: 
+    0 16px 36px rgba(35, 10, 8, 0.38),
+    0 3px 8px rgba(0, 0, 0, 0.12);
+  position: relative;
+  transition: transform 0.4s var(--beautiful-memories-ease-spring), box-shadow 0.4s ease;
+  user-select: none;
+}
+
+.beautiful-memories-polaroid-card:hover {
+  transform: scale(1.02) rotate(0deg) !important;
+  box-shadow: 
+    0 22px 48px rgba(35, 10, 8, 0.48),
+    0 6px 14px rgba(0, 0, 0, 0.16);
+}
+
+/* Alternating Organic Scrapbook Tilts */
+.polaroid-tilt-left { transform: rotate(-1.8deg); }
+.polaroid-tilt-right { transform: rotate(1.6deg); }
+.polaroid-tilt-slight-left { transform: rotate(-1.1deg); }
+.polaroid-tilt-slight-right { transform: rotate(1.2deg); }
+.polaroid-tilt-center { transform: rotate(0.4deg); }
+
+/* Washi Tape Strip Accents */
+.beautiful-memories-washi-tape {
+  position: absolute;
+  height: 28px;
+  background: var(--beautiful-memories-tape);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.14);
+  border-left: 2px dashed rgba(165, 135, 95, 0.4);
+  border-right: 2px dashed rgba(165, 135, 95, 0.4);
+  z-index: 5;
+}
+
+.washi-tape-center {
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 110px;
+}
+
+.washi-tape-left {
+  top: -12px;
+  left: 15%;
+  transform: rotate(-3deg);
+  width: 100px;
+}
+
+.washi-tape-right {
+  top: -12px;
+  right: 15%;
+  transform: rotate(2.5deg);
+  width: 100px;
+}
+
+.washi-tape-double {
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%) rotate(0.8deg);
+  width: 125px;
+  background: rgba(248, 226, 215, 0.9);
+}
+
+.washi-tape-gold {
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 130px;
+  background: var(--beautiful-memories-tape-gold);
+  border-left: 2px dashed rgba(185, 145, 60, 0.5);
+  border-right: 2px dashed rgba(185, 145, 60, 0.5);
+}
+
+/* Counter Tag */
+.beautiful-memories-counter-tag {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(50, 20, 15, 0.72);
+  color: #fff;
+  font-family: var(--beautiful-memories-font-ui);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  z-index: 4;
+}
+
+.tag-gold {
+  background: rgba(180, 130, 30, 0.85);
+  color: #fff;
+  border: 1px solid #ffd770;
+}
+
+/* Photo Inner Frame */
+.beautiful-memories-photo-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3.4;
+  background: #2a1515;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.35);
+}
+
+.beautiful-memories-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.beautiful-memories-polaroid-card:hover .beautiful-memories-img {
+  transform: scale(1.03);
+}
+
+.beautiful-memories-photo-vignette {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 25px rgba(35, 15, 10, 0.25);
+  pointer-events: none;
+}
+
+/* Polaroid Caption Area */
+.beautiful-memories-caption-area {
+  padding-top: 1.35rem;
+  padding-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.beautiful-memories-caption {
+  font-family: var(--beautiful-memories-font-hand);
+  font-size: clamp(1.35rem, 3.2vw, 1.65rem);
+  font-weight: 600;
+  color: var(--beautiful-memories-ink);
+  line-height: 1.3;
+  letter-spacing: 0.3px;
+  text-align: left;
+  flex: 1;
+}
+
+.caption-highlight {
+  color: var(--beautiful-memories-crimson);
+  font-weight: 700;
+}
+
+.beautiful-memories-doodle-dcor {
+  font-size: 1.35rem;
+  color: var(--beautiful-memories-crimson-soft);
+  opacity: 0.8;
+  user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   7. Final Closing Section & Continue Button (Only this page has CONTINUE)
+   -------------------------------------------------------------------------- */
+.beautiful-memories-closing-section {
+  width: 100%;
+  margin-top: 6rem;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.85s var(--beautiful-memories-ease-smooth), transform 0.85s var(--beautiful-memories-ease-smooth);
+}
+
+.beautiful-memories-closing-section.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.beautiful-memories-closing-card {
+  width: 100%;
+  max-width: 620px;
+  background: var(--beautiful-memories-cream);
+  border: 2px solid var(--beautiful-memories-polaroid-border);
+  border-radius: 8px;
+  padding: 3rem 2.25rem 2.75rem;
+  box-shadow: 
+    0 16px 40px rgba(35, 10, 8, 0.42),
+    0 4px 10px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  position: relative;
+  background-image: 
+    radial-gradient(circle at 50% 15%, rgba(255, 235, 195, 0.5) 0%, transparent 65%);
+}
+
+.beautiful-memories-tape-closing-tl {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  transform: rotate(-3deg);
+  width: 90px;
+  height: 26px;
+  background: var(--beautiful-memories-tape);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+}
+
+.beautiful-memories-tape-closing-tr {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  transform: rotate(3deg);
+  width: 90px;
+  height: 26px;
+  background: var(--beautiful-memories-tape);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+}
+
+.beautiful-memories-closing-doodles {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 0.75rem;
+}
+
+.bm-closing-doodle {
+  font-size: 1.35rem;
+  color: var(--beautiful-memories-gold-deep);
+}
+
+.beautiful-memories-closing-pretitle {
+  display: inline-block;
+  font-family: var(--beautiful-memories-font-ui);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--beautiful-memories-crimson);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.beautiful-memories-closing-heading {
+  font-family: var(--beautiful-memories-font-serif);
+  font-size: clamp(1.75rem, 3.8vw, 2.35rem);
+  font-weight: 700;
+  color: var(--beautiful-memories-crimson);
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+
+.beautiful-memories-divider {
+  color: var(--beautiful-memories-crimson-soft);
+  font-size: 1.1rem;
+  margin: 0.5rem 0 1.25rem;
+  letter-spacing: 4px;
+}
+
+.beautiful-memories-closing-text {
+  font-family: var(--beautiful-memories-font-serif);
+  font-size: 1.18rem;
+  line-height: 1.65;
+  color: var(--beautiful-memories-ink-soft);
+  max-width: 500px;
+  margin: 0 auto 2.25rem;
+}
+
+/* Continue Button: Navigates to Section 07 (birthday letter.html) */
+.beautiful-memories-action-area {
+  display: flex;
+  justify-content: center;
+}
+
+.beautiful-memories-continue-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #a31821 0%, #6e080b 100%);
+  color: #fff;
+  border: 2px solid #ffd770;
+  border-radius: 36px;
+  padding: 1.1rem 2.6rem;
+  font-family: var(--beautiful-memories-font-ui);
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 
+    0 8px 24px rgba(60, 10, 10, 0.45),
+    0 0 16px var(--beautiful-memories-gold-glow);
+  transition: transform 0.25s var(--beautiful-memories-ease-spring), box-shadow 0.25s ease, background 0.25s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.beautiful-memories-continue-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 
+    0 12px 32px rgba(60, 10, 10, 0.55),
+    0 0 24px var(--beautiful-memories-gold-glow);
+  background: linear-gradient(135deg, #b51c27 0%, #7d0a0e 100%);
+}
+
+.beautiful-memories-continue-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.beautiful-memories-continue-btn:focus-visible {
+  outline: 3px solid #ffd770;
+  outline-offset: 4px;
+}
+
+.beautiful-memories-btn-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+/* Smooth Page Exit Transition */
+.beautiful-memories-is-exiting {
+  animation: beautiful-memories-fade-out 0.75s ease forwards;
+}
+
+@keyframes beautiful-memories-fade-out {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.98); }
+}
+
+/* --------------------------------------------------------------------------
+   8. Responsive Adjustments
+   -------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  .beautiful-memories-main {
+    padding: 2rem 1rem 5rem;
+  }
+
+  .beautiful-memories-header-card,
+  .beautiful-memories-closing-card {
+    padding: 2rem 1.25rem 1.75rem;
+  }
+
+  .beautiful-memories-gallery {
+    gap: 4.5rem;
+  }
+
+  .beautiful-memories-polaroid-card {
+    padding: 0.85rem 0.85rem 1.85rem 0.85rem;
+  }
+
+  .beautiful-memories-caption {
+    font-size: 1.25rem;
+  }
+
+  .beautiful-memories-continue-btn {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 0.92rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. Accessibility: Reduced Motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .beautiful-memories-photo-section,
+  .beautiful-memories-closing-section {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .beautiful-memories-polaroid-card {
+    transform: none !important;
+  }
+}

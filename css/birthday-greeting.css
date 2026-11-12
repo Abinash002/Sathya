@@ -1,0 +1,871 @@
+/* ==========================================================================
+   SATHYA'S BIRTHDAY WEBSITE — SECTION 03: BIRTHDAY GREETING & MUSIC PLAYER
+   Style: Cute Romantic Vintage Scrapbook Collage
+   Class Prefix: birthday-greeting-
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS Variables & Reset
+   -------------------------------------------------------------------------- */
+:root {
+  --birthday-greeting-bg-red: #8b0d11;
+  --birthday-greeting-cream: #fbf5e7;
+  --birthday-greeting-cream-light: #fffdf8;
+  --birthday-greeting-cream-dark: #eddcc4;
+  --birthday-greeting-crimson: #a81c20;
+  --birthday-greeting-crimson-dark: #7b0f12;
+  --birthday-greeting-crimson-light: #c92f34;
+  --birthday-greeting-gold: #ffd770;
+  --birthday-greeting-gold-deep: #e5a928;
+  --birthday-greeting-gold-glow: rgba(255, 215, 110, 0.85);
+  --birthday-greeting-ink: #3b2219;
+  --birthday-greeting-ink-light: #5d3826;
+  --birthday-greeting-washi: #e8caa4;
+  --birthday-greeting-shadow: rgba(45, 15, 10, 0.45);
+
+  --birthday-greeting-font-heading: 'Caveat', 'Dancing Script', cursive;
+  --birthday-greeting-font-body: 'Lora', 'Georgia', serif;
+  --birthday-greeting-font-ui: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --birthday-greeting-ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --birthday-greeting-ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--birthday-greeting-bg-red);
+  font-family: var(--birthday-greeting-font-body);
+  color: var(--birthday-greeting-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.birthday-greeting-body {
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------------
+   2. Global Scrapbook Background (Desktop & Mobile)
+   -------------------------------------------------------------------------- */
+.birthday-greeting-bg-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url('../assets/scrapbook-background.webp');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+@media (max-width: 768px) {
+  .birthday-greeting-bg-layer {
+    background-image: url('../assets/scrapbook-background-mobile.webp');
+    background-size: cover;
+  }
+}
+
+/* Ambient Floating Particles */
+.birthday-greeting-ambient-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.birthday-greeting-ambient-item {
+  position: absolute;
+  user-select: none;
+  animation: birthday-greeting-heart-float 6s ease-in-out infinite alternate;
+}
+
+.birthday-greeting-ambient-item.ah-1 { top: 10%; left: 8%; font-size: 1.5rem; color: rgba(255, 180, 190, 0.4); animation-duration: 5.5s; }
+.birthday-greeting-ambient-item.ah-2 { top: 82%; left: 10%; font-size: 1.8rem; color: rgba(255, 200, 210, 0.35); animation-duration: 7s; }
+.birthday-greeting-ambient-item.ah-3 { top: 18%; right: 9%; font-size: 1.4rem; color: rgba(255, 190, 200, 0.4); animation-duration: 6.2s; }
+.birthday-greeting-ambient-item.ah-4 { top: 78%; right: 10%; font-size: 1.6rem; color: rgba(255, 210, 220, 0.35); animation-duration: 8s; }
+.birthday-greeting-ambient-item.as-1 { top: 22%; left: 18%; font-size: 1.1rem; color: rgba(255, 225, 130, 0.55); animation-duration: 4.8s; }
+.birthday-greeting-ambient-item.as-2 { top: 86%; left: 22%; font-size: 1rem; color: rgba(255, 225, 130, 0.5); animation-duration: 5.2s; }
+.birthday-greeting-ambient-item.as-3 { top: 14%; right: 20%; font-size: 1.2rem; color: rgba(255, 235, 140, 0.6); animation-duration: 6s; }
+
+/* --------------------------------------------------------------------------
+   3. Fixed Top-Left Background Music Player
+   -------------------------------------------------------------------------- */
+.birthday-greeting-music-player {
+  position: fixed;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.birthday-greeting-music-btn {
+  appearance: none;
+  width: 48px;
+  height: 48px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fdf8ed 0%, #edd8be 100%);
+  border: 2px solid #caa24c;
+  box-shadow: 
+    0 4px 10px rgba(45, 15, 10, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.2s var(--birthday-greeting-ease-spring), box-shadow 0.2s ease, border-color 0.2s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.birthday-greeting-music-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 
+    0 6px 14px rgba(45, 15, 10, 0.45),
+    0 0 12px var(--birthday-greeting-gold-glow);
+  border-color: #ffd770;
+}
+
+.birthday-greeting-music-btn:active {
+  transform: scale(0.95);
+}
+
+.birthday-greeting-music-btn:focus-visible {
+  outline: 2px solid #ffd770;
+  outline-offset: 3px;
+}
+
+/* Vinyl groove lines & spinning note icon */
+.birthday-greeting-music-disc {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #3b2219;
+  background-image: 
+    radial-gradient(circle, transparent 30%, rgba(255, 215, 110, 0.2) 35%, transparent 40%),
+    radial-gradient(circle, transparent 55%, rgba(255, 215, 110, 0.2) 60%, transparent 65%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.8);
+  transition: transform 0.3s ease;
+}
+
+.birthday-greeting-music-note {
+  font-size: 1.05rem;
+  color: #ffd770;
+  line-height: 1;
+}
+
+/* Playing spinning state */
+.birthday-greeting-music-player.is-playing .birthday-greeting-music-disc {
+  animation: birthday-greeting-music-spin 3s linear infinite;
+}
+
+.birthday-greeting-music-player.is-playing .birthday-greeting-music-btn {
+  border-color: #ffd770;
+  box-shadow: 
+    0 4px 12px rgba(45, 15, 10, 0.4),
+    0 0 16px var(--birthday-greeting-gold-glow);
+}
+
+/* Play/Pause tiny badge indicator */
+.birthday-greeting-music-indicator {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--birthday-greeting-crimson);
+  border: 1.5px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.birthday-greeting-music-indicator-icon {
+  width: 7px;
+  height: 7px;
+  fill: #ffffff;
+}
+
+/* Toggle play triangle vs pause bars */
+.birthday-greeting-indicator-play {
+  display: block;
+}
+
+.birthday-greeting-indicator-pause {
+  display: none;
+}
+
+.birthday-greeting-music-player.is-playing .birthday-greeting-indicator-play {
+  display: none;
+}
+
+.birthday-greeting-music-player.is-playing .birthday-greeting-indicator-pause {
+  display: block;
+}
+
+.birthday-greeting-music-player.is-playing .birthday-greeting-music-indicator {
+  background: #a31821;
+}
+
+/* Ready-to-play subtle pulse */
+.birthday-greeting-music-player.is-ready-to-play .birthday-greeting-music-btn {
+  animation: birthday-greeting-music-pulse 2s ease-in-out infinite alternate;
+}
+
+/* Tooltip badge next to player */
+.birthday-greeting-music-tooltip {
+  background: rgba(251, 245, 231, 0.95);
+  color: var(--birthday-greeting-ink);
+  font-family: var(--birthday-greeting-font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(202, 162, 76, 0.6);
+  box-shadow: 0 2px 8px rgba(45, 15, 10, 0.25);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+}
+
+.birthday-greeting-music-player:hover .birthday-greeting-music-tooltip,
+.birthday-greeting-music-player.is-ready-to-play .birthday-greeting-music-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --------------------------------------------------------------------------
+   4. Main Container & Card Layout
+   -------------------------------------------------------------------------- */
+.birthday-greeting-main {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem 3.5rem;
+  z-index: 2;
+}
+
+.birthday-greeting-container {
+  position: relative;
+  width: 100%;
+  max-width: 470px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Main Cream Torn-Paper Card */
+.birthday-greeting-card {
+  position: relative;
+  width: 100%;
+  background: var(--birthday-greeting-cream);
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.45) 0%, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(220, 195, 160, 0.25) 0%, transparent 45%),
+    linear-gradient(180deg, #fbf5e7 0%, #f6edd9 100%);
+  border-radius: 8px;
+  padding: 38px 24px 26px;
+  box-shadow: 
+    0 22px 45px rgba(35, 8, 10, 0.45),
+    0 6px 16px rgba(0, 0, 0, 0.2),
+    inset 0 0 35px rgba(220, 195, 160, 0.35);
+  border: 1px solid rgba(216, 196, 169, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* Card fade out when continuing */
+.birthday-greeting-card.birthday-greeting-is-exiting {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+/* Washi Tape Strips on Card */
+.birthday-greeting-tape {
+  position: absolute;
+  width: 76px;
+  height: 22px;
+  background-color: var(--birthday-greeting-washi);
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(220,185,140,0.3) 100%);
+  opacity: 0.88;
+  box-shadow: 0 2px 4px rgba(60, 20, 10, 0.15);
+  pointer-events: none;
+  z-index: 4;
+}
+
+.birthday-greeting-tape-tl {
+  top: -8px;
+  left: 22px;
+  transform: rotate(-14deg);
+}
+
+.birthday-greeting-tape-tr {
+  top: -8px;
+  right: 22px;
+  transform: rotate(12deg);
+}
+
+.birthday-greeting-tape-bl {
+  bottom: 22px;
+  left: -12px;
+  width: 60px;
+  transform: rotate(-35deg);
+}
+
+/* Hand-Drawn Doodle Hearts */
+.birthday-greeting-doodle-heart {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  color: var(--birthday-greeting-crimson);
+  opacity: 0.8;
+  line-height: 1;
+}
+
+.birthday-greeting-doodle-heart.dh-1 { top: 92px; left: 16px; font-size: 1.6rem; transform: rotate(-12deg); }
+.birthday-greeting-doodle-heart.dh-2 { top: 135px; right: 24px; font-size: 1.4rem; transform: rotate(15deg); }
+.birthday-greeting-doodle-heart.dh-3 { top: 385px; left: 18px; font-size: 1.3rem; transform: rotate(-18deg); }
+.birthday-greeting-doodle-heart.dh-4 { top: 430px; right: 22px; font-size: 1.4rem; transform: rotate(10deg); }
+
+/* Radiant Accent Sparkle Marks next to Headings */
+.birthday-greeting-radiant-tl,
+.birthday-greeting-radiant-tr {
+  position: absolute;
+  top: 42px;
+  font-size: 1.2rem;
+  color: #f39c12;
+  font-weight: bold;
+  pointer-events: none;
+  user-select: none;
+}
+.birthday-greeting-radiant-tl { left: 12px; transform: rotate(-12deg); }
+.birthday-greeting-radiant-tr { right: 12px; transform: rotate(12deg); }
+
+/* --------------------------------------------------------------------------
+   5. Headings & Typography
+   -------------------------------------------------------------------------- */
+/* Small Top Banner: "YOU UNLOCKED SOMETHING SPECIAL!" */
+.birthday-greeting-banner-wrap {
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.birthday-greeting-small-heading {
+  display: inline-block;
+  background-color: #f1dfbe;
+  background-image: linear-gradient(180deg, #f5e7ce 0%, #ead3ab 100%);
+  padding: 5px 20px;
+  border-radius: 3px;
+  font-family: var(--birthday-greeting-font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  color: var(--birthday-greeting-ink-light);
+  box-shadow: 0 1px 3px rgba(60, 20, 10, 0.12);
+  transform: rotate(-1deg);
+}
+
+/* Main Heading: "HAPPY BIRTHDAY, SATHYA!" */
+.birthday-greeting-heading-wrap {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 18px;
+  animation: birthday-greeting-heading-in 0.8s var(--birthday-greeting-ease-smooth) both;
+}
+
+.birthday-greeting-main-heading {
+  font-family: var(--birthday-greeting-font-heading);
+  font-size: 2.85rem;
+  font-weight: 700;
+  line-height: 1.05;
+  color: #4a151b;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Yellow Curved Underline Flourish */
+.birthday-greeting-heading-flourish {
+  width: 100%;
+  max-width: 260px;
+  height: 4.5px;
+  margin: 5px auto 0;
+  background: linear-gradient(90deg, transparent 0%, #f5af19 25%, #e59a18 75%, transparent 100%);
+  border-radius: 4px;
+  opacity: 0.9;
+}
+
+/* --------------------------------------------------------------------------
+   6. Polaroid Photo Frame & Corner Stickers
+   -------------------------------------------------------------------------- */
+.birthday-greeting-polaroid-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 330px;
+  margin: 0 auto 22px;
+  z-index: 3;
+}
+
+/* Polaroid Card Body */
+.birthday-greeting-polaroid {
+  background: #ffffff;
+  background-image: linear-gradient(180deg, #ffffff 0%, #fbf9f4 100%);
+  padding: 12px 12px 34px 12px;
+  border-radius: 4px;
+  box-shadow: 
+    0 12px 28px rgba(45, 15, 10, 0.35),
+    0 3px 8px rgba(0, 0, 0, 0.18),
+    inset 0 0 1px rgba(0, 0, 0, 0.15);
+  transform: rotate(-3deg);
+  transition: transform 0.4s var(--birthday-greeting-ease-spring), box-shadow 0.4s ease;
+  position: relative;
+  animation: birthday-greeting-photo-drop 0.9s var(--birthday-greeting-ease-spring) both 0.2s;
+}
+
+.birthday-greeting-polaroid:hover {
+  transform: rotate(-1deg) scale(1.02);
+  box-shadow: 
+    0 16px 36px rgba(45, 15, 10, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Washi Tape at Top Center of Polaroid */
+.birthday-greeting-photo-tape {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(2deg);
+  width: 90px;
+  height: 20px;
+  background-color: var(--birthday-greeting-washi);
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.25) 0%, rgba(220,185,140,0.35) 100%);
+  opacity: 0.9;
+  box-shadow: 0 1px 3px rgba(60, 20, 10, 0.15);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Inner Photo Container */
+.birthday-greeting-photo-inner {
+  width: 100%;
+  aspect-ratio: 4 / 3.2;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #d7cbc0;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.birthday-greeting-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+/* Side Stickers Around Polaroid */
+/* 1. Mini Envelope Sticker (Left) */
+.birthday-greeting-sticker-envelope {
+  position: absolute;
+  top: 14px;
+  left: -48px;
+  width: 82px;
+  z-index: 4;
+  pointer-events: none;
+  transform: rotate(-14deg);
+  filter: drop-shadow(0 4px 8px rgba(45, 15, 10, 0.28));
+  transition: transform 0.3s ease;
+}
+
+/* 2. Birthday Cake Postage Stamp (Right) */
+.birthday-greeting-sticker-stamp {
+  position: absolute;
+  top: 24px;
+  right: -44px;
+  width: 78px;
+  z-index: 4;
+  pointer-events: none;
+  transform: rotate(10deg);
+  filter: drop-shadow(0 4px 8px rgba(45, 15, 10, 0.28));
+  transition: transform 0.3s ease;
+}
+
+/* 3. Sunflower Sticker on Bottom-Left of Polaroid */
+.birthday-greeting-sticker-sunflower {
+  position: absolute;
+  bottom: -22px;
+  left: -26px;
+  width: 110px;
+  z-index: 6;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 12px rgba(45, 15, 10, 0.3));
+}
+
+/* 4. Red Satin Ribbon Bow on Bottom-Right of Polaroid */
+.birthday-greeting-sticker-bow {
+  position: absolute;
+  bottom: -16px;
+  right: -24px;
+  width: 96px;
+  z-index: 6;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(45, 15, 10, 0.35));
+}
+
+/* --------------------------------------------------------------------------
+   7. Birthday Note & Continue Button
+   -------------------------------------------------------------------------- */
+/* Cream Deckled-Edge Birthday Note Sub-Card */
+.birthday-greeting-note-card {
+  position: relative;
+  width: 100%;
+  background: #fdf8ee;
+  background-image: 
+    radial-gradient(circle at 10% 50%, rgba(255, 255, 255, 0.5) 0%, transparent 40%),
+    linear-gradient(180deg, #fdf8ee 0%, #f6ecdc 100%);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-bottom: 22px;
+  border: 1px solid #dcc9ad;
+  box-shadow: 
+    0 4px 12px rgba(60, 20, 10, 0.12),
+    inset 0 0 16px rgba(220, 195, 160, 0.25);
+  animation: birthday-greeting-note-in 0.8s var(--birthday-greeting-ease-smooth) both 0.4s;
+}
+
+.birthday-greeting-note-text {
+  font-family: var(--birthday-greeting-font-body);
+  font-size: 1.05rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--birthday-greeting-ink-light);
+  letter-spacing: 0.2px;
+}
+
+.birthday-greeting-heart-symbol {
+  font-style: normal;
+  color: var(--birthday-greeting-crimson);
+  margin-left: 2px;
+}
+
+/* Continue Call to Action Section */
+.birthday-greeting-cta-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.birthday-greeting-cta-rays {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.birthday-greeting-cta-rays-left { transform: rotate(-25deg); }
+.birthday-greeting-cta-rays-right { transform: rotate(25deg); }
+
+.birthday-greeting-ray {
+  display: block;
+  width: 14px;
+  height: 2.5px;
+  background-color: #f39c12;
+  border-radius: 2px;
+}
+.birthday-greeting-ray:nth-child(2) { width: 18px; }
+
+/* Continue Button */
+.birthday-greeting-continue-btn {
+  appearance: none;
+  background: linear-gradient(180deg, #a81c20 0%, #760c10 100%);
+  color: #ffffff;
+  border: 1.5px solid #62080c;
+  padding: 12px 36px;
+  border-radius: 24px;
+  font-family: var(--birthday-greeting-font-ui);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 48px;
+  min-width: 44px;
+  box-shadow: 
+    0 4px 12px rgba(90, 10, 15, 0.4),
+    inset 0 1px 0 rgba(255, 180, 180, 0.45);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+  animation: birthday-greeting-btn-pulse 2.8s ease-in-out infinite;
+}
+
+.birthday-greeting-continue-btn:hover {
+  background: linear-gradient(180deg, #ba2227 0%, #881014 100%);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 16px rgba(90, 10, 15, 0.5),
+    0 0 14px var(--birthday-greeting-gold-glow),
+    inset 0 1px 0 rgba(255, 200, 200, 0.6);
+}
+
+.birthday-greeting-continue-btn:active {
+  transform: translateY(2px);
+  box-shadow: 
+    0 2px 4px rgba(70, 10, 15, 0.4),
+    inset 0 2px 4px rgba(40, 5, 8, 0.4);
+}
+
+.birthday-greeting-continue-btn:focus-visible {
+  outline: 2px solid #ffd770;
+  outline-offset: 3px;
+}
+
+/* Toast Message when continuing */
+.birthday-greeting-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(30px);
+  background: #fdf8ee;
+  color: var(--birthday-greeting-ink);
+  font-family: var(--birthday-greeting-font-body);
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 20px;
+  border: 1px solid #caa24c;
+  box-shadow: 0 8px 24px rgba(45, 15, 10, 0.45);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s var(--birthday-greeting-ease-spring), opacity 0.4s ease;
+}
+
+.birthday-greeting-toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   8. Keyframe Animations
+   -------------------------------------------------------------------------- */
+/* Music disk continuous spin */
+@keyframes birthday-greeting-music-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Music button subtle pulse */
+@keyframes birthday-greeting-music-pulse {
+  0% { transform: scale(1); box-shadow: 0 4px 10px rgba(45, 15, 10, 0.35); }
+  100% { transform: scale(1.06); box-shadow: 0 4px 12px rgba(45, 15, 10, 0.4), 0 0 12px var(--birthday-greeting-gold-glow); }
+}
+
+/* Heading entrance */
+@keyframes birthday-greeting-heading-in {
+  0% { opacity: 0; transform: translateY(-14px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Photo frame entrance drop */
+@keyframes birthday-greeting-photo-drop {
+  0% { opacity: 0; transform: translateY(-24px) rotate(0deg) scale(0.92); }
+  60% { transform: translateY(4px) rotate(-4deg) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) rotate(-3deg) scale(1); }
+}
+
+/* Note reveal */
+@keyframes birthday-greeting-note-in {
+  0% { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Continue button pulse */
+@keyframes birthday-greeting-btn-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+/* Ambient floating hearts */
+@keyframes birthday-greeting-heart-float {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-12px) scale(1.08); }
+  100% { transform: translateY(-5px) scale(0.95); }
+}
+
+/* --------------------------------------------------------------------------
+   9. Responsive Layout (Desktop & Mobile)
+   -------------------------------------------------------------------------- */
+@media (min-width: 769px) {
+  .birthday-greeting-main {
+    padding: 3.5rem 1.5rem 4.5rem;
+  }
+
+  .birthday-greeting-container {
+    max-width: 500px;
+  }
+
+  .birthday-greeting-card {
+    padding: 42px 36px 30px;
+  }
+
+  .birthday-greeting-main-heading {
+    font-size: 3.2rem;
+  }
+
+  .birthday-greeting-polaroid-wrap {
+    max-width: 360px;
+  }
+
+  .birthday-greeting-sticker-sunflower {
+    width: 125px;
+    bottom: -26px;
+    left: -32px;
+  }
+
+  .birthday-greeting-sticker-bow {
+    width: 110px;
+    bottom: -20px;
+    right: -28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .birthday-greeting-main {
+    padding: 1.5rem 0.75rem 2.5rem;
+  }
+
+  .birthday-greeting-music-player {
+    top: 14px;
+    left: 14px;
+  }
+
+  .birthday-greeting-music-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .birthday-greeting-music-tooltip {
+    display: none;
+  }
+
+  .birthday-greeting-card {
+    padding: 30px 16px 20px;
+    border-radius: 6px;
+  }
+
+  .birthday-greeting-small-heading {
+    font-size: 1rem;
+    padding: 4px 14px;
+  }
+
+  .birthday-greeting-main-heading {
+    font-size: 2.3rem;
+  }
+
+  .birthday-greeting-polaroid-wrap {
+    max-width: 290px;
+    margin-bottom: 18px;
+  }
+
+  .birthday-greeting-sticker-envelope {
+    left: -32px;
+    width: 68px;
+  }
+
+  .birthday-greeting-sticker-stamp {
+    right: -28px;
+    width: 66px;
+  }
+
+  .birthday-greeting-sticker-sunflower {
+    width: 92px;
+    bottom: -18px;
+    left: -20px;
+  }
+
+  .birthday-greeting-sticker-bow {
+    width: 80px;
+    bottom: -12px;
+    right: -18px;
+  }
+
+  .birthday-greeting-note-card {
+    padding: 14px 14px;
+    margin-bottom: 18px;
+  }
+
+  .birthday-greeting-note-text {
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .birthday-greeting-continue-btn {
+    padding: 11px 28px;
+    font-size: 0.95rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. Accessibility: prefers-reduced-motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .birthday-greeting-polaroid {
+    transform: rotate(-3deg) !important;
+  }
+
+  .birthday-greeting-music-player.is-playing .birthday-greeting-music-disc {
+    animation: none !important;
+  }
+}

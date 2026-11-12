@@ -1,0 +1,871 @@
+/* ==========================================================================
+   SATHYA'S BIRTHDAY WEBSITE - SECTION 04: CELEBRATION INTRODUCTION
+   Style: Cute Romantic Vintage Scrapbook Collage
+   Class Prefix: celebration-intro-
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS Custom Properties / Design Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  --celebration-intro-crimson: #8b0d11;
+  --celebration-intro-crimson-dark: #66080b;
+  --celebration-intro-cream: #fcf8f0;
+  --celebration-intro-parchment: #f6ecdc;
+  --celebration-intro-parchment-border: #e2d2bb;
+  --celebration-intro-ink: #531215;
+  --celebration-intro-ink-soft: #70262a;
+  --celebration-intro-ink-muted: #8b4549;
+  --celebration-intro-gold: #ffd770;
+  --celebration-intro-gold-glow: rgba(255, 215, 112, 0.45);
+  --celebration-intro-gold-bright: #ffea9f;
+  --celebration-intro-orange-stroke: rgba(243, 156, 18, 0.35);
+  --celebration-intro-tape: #ece3cf;
+  --celebration-intro-tape-shadow: rgba(45, 15, 10, 0.15);
+
+  --celebration-intro-font-hand: 'Caveat', 'Marck Script', cursive;
+  --celebration-intro-font-display: 'Playfair Display', serif;
+  --celebration-intro-font-serif: 'Cormorant Garamond', Georgia, serif;
+  --celebration-intro-font-ui: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  --celebration-intro-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --celebration-intro-ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Global Background (Strict preservation of Section 01 artwork)
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+}
+
+body.celebration-intro-body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: var(--celebration-intro-font-ui);
+  background-color: var(--celebration-intro-crimson);
+  /* Approved original desktop background */
+  background-image: url('../assets/scrapbook-background.webp');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--celebration-intro-ink);
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile Background Switching (Preserving approved Section 01 mobile background) */
+@media (max-width: 768px) {
+  body.celebration-intro-body {
+    background-image: url('../assets/scrapbook-background-mobile.webp');
+    background-attachment: scroll;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Fixed Top-Left Background Music Player (Seamlessly matching Section 03)
+   -------------------------------------------------------------------------- */
+.celebration-intro-music-player {
+  position: fixed;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  pointer-events: auto;
+}
+
+.celebration-intro-music-btn {
+  appearance: none;
+  width: 48px;
+  height: 48px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  background: var(--celebration-intro-cream);
+  border: 2px solid #e5c98d;
+  box-shadow: 
+    0 4px 10px rgba(45, 15, 10, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.25s var(--celebration-intro-ease-spring), box-shadow 0.25s ease, border-color 0.25s ease;
+  padding: 0;
+}
+
+.celebration-intro-music-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 
+    0 6px 14px rgba(45, 15, 10, 0.45),
+    0 0 12px var(--celebration-intro-gold-glow);
+  border-color: #ffd770;
+}
+
+.celebration-intro-music-btn:active {
+  transform: scale(0.95);
+}
+
+.celebration-intro-music-btn:focus-visible {
+  outline: 2px solid #ffd770;
+  outline-offset: 3px;
+}
+
+/* Vinyl groove lines & spinning note icon */
+.celebration-intro-music-disc {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #3b2219;
+  background-image: 
+    radial-gradient(circle, #2d1811 18%, transparent 20%),
+    radial-gradient(circle, transparent 40%, rgba(255, 255, 255, 0.08) 42%, transparent 44%),
+    radial-gradient(circle, transparent 65%, rgba(255, 255, 255, 0.08) 67%, transparent 69%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.celebration-intro-music-note {
+  font-size: 1.05rem;
+  color: #ffd770;
+  line-height: 1;
+}
+
+/* Playing spinning state */
+.celebration-intro-music-player.is-playing .celebration-intro-music-disc {
+  animation: celebration-intro-music-spin 3s linear infinite;
+}
+
+.celebration-intro-music-player.is-playing .celebration-intro-music-btn {
+  border-color: #ffd770;
+  box-shadow: 
+    0 4px 12px rgba(45, 15, 10, 0.4),
+    0 0 16px var(--celebration-intro-gold-glow);
+}
+
+/* Play/Pause tiny badge indicator */
+.celebration-intro-music-indicator {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--celebration-intro-crimson);
+  border: 1.5px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.celebration-intro-music-indicator-icon {
+  width: 7px;
+  height: 7px;
+  fill: #ffffff;
+}
+
+/* Toggle play triangle vs pause bars */
+.celebration-intro-indicator-play {
+  display: block;
+}
+
+.celebration-intro-indicator-pause {
+  display: none;
+}
+
+.celebration-intro-music-player.is-playing .celebration-intro-indicator-play {
+  display: none;
+}
+
+.celebration-intro-music-player.is-playing .celebration-intro-indicator-pause {
+  display: block;
+}
+
+.celebration-intro-music-player.is-playing .celebration-intro-music-indicator {
+  background: #a31821;
+}
+
+/* Tooltip badge next to player */
+.celebration-intro-music-tooltip {
+  background: rgba(251, 245, 231, 0.95);
+  color: var(--celebration-intro-ink);
+  font-family: var(--celebration-intro-font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(210, 180, 140, 0.6);
+  box-shadow: 0 2px 6px rgba(45, 15, 10, 0.25);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+}
+
+.celebration-intro-music-player:hover .celebration-intro-music-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --------------------------------------------------------------------------
+   4. Main Composition & Cream Torn-Paper Panel
+   -------------------------------------------------------------------------- */
+.celebration-intro-main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3.5rem 1.25rem 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.celebration-intro-container {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Cream Torn-Paper Panel */
+.celebration-intro-card {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(178deg, #fcf8f0 0%, #fbf5e7 60%, #f5ecdb 100%);
+  border-radius: 6px;
+  padding: 42px 34px 38px;
+  box-shadow: 
+    0 16px 38px rgba(35, 8, 10, 0.52),
+    0 4px 12px rgba(0, 0, 0, 0.22),
+    inset 0 0 45px rgba(220, 195, 160, 0.2);
+  border: 1px solid var(--celebration-intro-parchment-border);
+  text-align: center;
+  animation: celebration-intro-card-entrance 0.9s var(--celebration-intro-ease-spring) both;
+  transform-origin: center center;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* Deckled / irregular torn edges top & bottom */
+.celebration-intro-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: radial-gradient(circle at 10px 0, transparent 6px, #fcf8f0 7px) repeat-x;
+  background-size: 16px 6px;
+  opacity: 0.65;
+}
+
+.celebration-intro-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: radial-gradient(circle at 10px 6px, transparent 6px, #f5ecdb 7px) repeat-x;
+  background-size: 16px 6px;
+  opacity: 0.65;
+}
+
+/* Masking Tape Centered at Top Edge */
+.celebration-intro-tape {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 135px;
+  height: 32px;
+  background: rgba(238, 230, 212, 0.88);
+  border-left: 2px dashed rgba(200, 185, 160, 0.5);
+  border-right: 2px dashed rgba(200, 185, 160, 0.5);
+  box-shadow: 0 2px 6px var(--celebration-intro-tape-shadow);
+  backdrop-filter: blur(1px);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Hand-drawn Doodles & Artistic Emphasis Strokes */
+.celebration-intro-doodles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.celebration-intro-doodle {
+  position: absolute;
+  color: #ff4760;
+  line-height: 1;
+  user-select: none;
+  opacity: 0.75;
+}
+
+.celebration-intro-doodle-heart-1 {
+  top: 24px;
+  left: 22px;
+  font-size: 1.4rem;
+  transform: rotate(-14deg);
+  animation: celebration-intro-doodle-hover 3.5s ease-in-out infinite alternate;
+}
+
+.celebration-intro-doodle-heart-2 {
+  bottom: 26px;
+  right: 24px;
+  font-size: 1.25rem;
+  color: #e74c3c;
+  transform: rotate(12deg);
+  animation: celebration-intro-doodle-hover 4s ease-in-out infinite alternate 0.5s;
+}
+
+.celebration-intro-doodle-sparkle-1 {
+  top: 36px;
+  right: 26px;
+  font-size: 1.3rem;
+  color: #e67e22;
+  transform: rotate(8deg);
+}
+
+.celebration-intro-doodle-sparkle-2 {
+  bottom: 30px;
+  left: 26px;
+  font-size: 1.2rem;
+  color: #f39c12;
+}
+
+/* Yellow/Orange Emphasis Brush Strokes */
+.celebration-intro-brush-stroke {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 4px;
+  opacity: 0.45;
+}
+
+.celebration-intro-stroke-top {
+  top: 14px;
+  right: 48px;
+  width: 50px;
+  height: 4px;
+  background: linear-gradient(90deg, #f1c40f, #e67e22);
+  transform: rotate(-4deg);
+}
+
+.celebration-intro-stroke-bottom {
+  bottom: 18px;
+  left: 55px;
+  width: 65px;
+  height: 4px;
+  background: linear-gradient(90deg, #e67e22, #f1c40f);
+  transform: rotate(3deg);
+}
+
+/* --------------------------------------------------------------------------
+   5. Interactive Stage Container
+   -------------------------------------------------------------------------- */
+.celebration-intro-stage {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(14px) scale(0.98);
+  transition: opacity 0.55s ease, transform 0.55s var(--celebration-intro-ease-spring);
+}
+
+.celebration-intro-stage.celebration-intro-stage-active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* --------------------------------------------------------------------------
+   6. STAGE 1: INVITATION (Gift Box & Content)
+   -------------------------------------------------------------------------- */
+.celebration-intro-gift-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 6px;
+  margin-bottom: 8px;
+}
+
+/* Soft realistic floor shadow under the gift box */
+.celebration-intro-gift-shadow {
+  position: absolute;
+  bottom: 6px;
+  width: 170px;
+  height: 22px;
+  background: radial-gradient(ellipse at center, rgba(45, 15, 10, 0.45) 0%, rgba(45, 15, 10, 0) 70%);
+  border-radius: 50%;
+  animation: celebration-intro-shadow-pulse 4.2s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+/* Prominent Cream Gift Box with Red Ribbon & Bow */
+.celebration-intro-gift-img {
+  position: relative;
+  z-index: 2;
+  width: 270px;
+  max-width: 80vw;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 12px 24px rgba(45, 15, 10, 0.35));
+  animation: celebration-intro-gift-float 4.2s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Main Heading: "Ready for a little celebration?" */
+.celebration-intro-heading {
+  font-family: var(--celebration-intro-font-hand);
+  font-size: 2.65rem;
+  font-weight: 700;
+  color: var(--celebration-intro-ink);
+  line-height: 1.15;
+  margin: 10px 0 12px;
+  letter-spacing: -0.5px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  position: relative;
+}
+
+/* Supporting Message: "I have something special planned for you..." */
+.celebration-intro-message {
+  font-family: var(--celebration-intro-font-serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--celebration-intro-ink-soft);
+  line-height: 1.4;
+  margin: 0 auto 28px;
+  max-width: 380px;
+}
+
+/* Main Interactive Button: "TAP TO START CELEBRATION ✨" */
+.celebration-intro-btn {
+  appearance: none;
+  border: none;
+  outline: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fdfbf5 0%, #faedd3 100%);
+  color: var(--celebration-intro-ink);
+  font-family: var(--celebration-intro-font-ui);
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  padding: 15px 32px;
+  min-height: 52px;
+  border-radius: 28px;
+  border: 2px solid #dfbb6c;
+  box-shadow: 
+    0 6px 16px rgba(45, 15, 10, 0.28),
+    inset 0 1px 2px #ffffff;
+  cursor: pointer;
+  transition: 
+    transform 0.25s var(--celebration-intro-ease-spring),
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+  overflow: hidden;
+}
+
+.celebration-intro-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  border-color: #f1c40f;
+  box-shadow: 
+    0 10px 22px rgba(45, 15, 10, 0.38),
+    0 0 16px var(--celebration-intro-gold-glow);
+  background: linear-gradient(135deg, #ffffff 0%, #fef3df 100%);
+}
+
+.celebration-intro-btn:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 3px 8px rgba(45, 15, 10, 0.3);
+}
+
+.celebration-intro-btn:focus-visible {
+  outline: 2px solid #ffd770;
+  outline-offset: 4px;
+}
+
+.celebration-intro-btn-text {
+  position: relative;
+  z-index: 2;
+}
+
+.celebration-intro-btn-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transform: skewX(-20deg);
+  animation: celebration-intro-btn-shimmer 3.5s ease-in-out infinite;
+}
+
+/* --------------------------------------------------------------------------
+   7. STAGES 2, 3, 4 (Gentle Emotional Storytelling)
+   -------------------------------------------------------------------------- */
+.celebration-intro-stage-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 10px 30px;
+  width: 100%;
+}
+
+.celebration-intro-stage-icon {
+  font-size: 2.8rem;
+  margin-bottom: 18px;
+  line-height: 1;
+  filter: drop-shadow(0 4px 8px rgba(45, 15, 10, 0.2));
+  animation: celebration-intro-icon-bob 2.8s ease-in-out infinite alternate;
+}
+
+.celebration-intro-stage-heading {
+  font-family: var(--celebration-intro-font-hand);
+  font-size: 2.85rem;
+  font-weight: 700;
+  color: var(--celebration-intro-ink);
+  line-height: 1.2;
+  margin-bottom: 14px;
+  letter-spacing: -0.5px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+}
+
+.celebration-intro-stage-subtext {
+  font-family: var(--celebration-intro-font-serif);
+  font-size: 1.55rem;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--celebration-intro-ink-soft);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.celebration-intro-wish-highlight {
+  color: #922227;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 215, 112, 0.4);
+}
+
+/* Staggered entrance helpers */
+.celebration-intro-fade-in-1 {
+  animation: celebration-intro-reveal-text 0.8s ease both;
+}
+
+.celebration-intro-fade-in-2 {
+  animation: celebration-intro-reveal-text 0.9s ease 0.35s both;
+}
+
+/* Loading Dots for Stage 4 */
+.celebration-intro-stage-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.celebration-intro-loader-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--celebration-intro-crimson);
+  animation: celebration-intro-loader-bounce 1.2s ease-in-out infinite alternate;
+}
+
+.celebration-intro-loader-dot:nth-child(2) {
+  animation-delay: 0.2s;
+  background: #c0392b;
+}
+
+.celebration-intro-loader-dot:nth-child(3) {
+  animation-delay: 0.4s;
+  background: #ffd770;
+}
+
+/* --------------------------------------------------------------------------
+   8. Golden Ambient Particles & Expanding Light Overlay (Stage 3 & 4)
+   -------------------------------------------------------------------------- */
+.celebration-intro-ambient-effects {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  overflow: hidden;
+}
+
+.celebration-intro-particles-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Dynamically created golden particle */
+.celebration-intro-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff7d6 20%, #ffd770 70%, transparent 100%);
+  box-shadow: 0 0 10px rgba(255, 215, 112, 0.8);
+  pointer-events: none;
+  opacity: 0;
+  animation: celebration-intro-particle-rise linear forwards;
+}
+
+/* Expanding Golden Radiant Light Overlay (Transition into Section 05 Cake) */
+.celebration-intro-golden-glow-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 235, 165, 0.95) 0%, rgba(255, 215, 112, 0.75) 45%, rgba(139, 13, 17, 0.9) 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.1s cubic-bezier(0.25, 1, 0.5, 1);
+  backdrop-filter: blur(4px);
+}
+
+.celebration-intro-golden-glow-overlay.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Smooth Exit Animation on the Card */
+.celebration-intro-card.celebration-intro-is-exiting {
+  opacity: 0;
+  transform: scale(0.96) translateY(-10px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* --------------------------------------------------------------------------
+   9. Keyframe Animations
+   -------------------------------------------------------------------------- */
+/* Card Entrance */
+@keyframes celebration-intro-card-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Gentle Gift Box Floating */
+@keyframes celebration-intro-gift-float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(-0.8deg);
+  }
+  100% {
+    transform: translateY(-3px) rotate(0.8deg);
+  }
+}
+
+/* Shadow expands/contracts inversely with float */
+@keyframes celebration-intro-shadow-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(0.88);
+    opacity: 0.28;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.38;
+  }
+}
+
+/* Button Shimmer */
+@keyframes celebration-intro-btn-shimmer {
+  0% {
+    left: -100%;
+  }
+  30%, 100% {
+    left: 140%;
+  }
+}
+
+/* Doodle Hover */
+@keyframes celebration-intro-doodle-hover {
+  0% { transform: translateY(0) rotate(-14deg); }
+  100% { transform: translateY(-4px) rotate(-10deg); }
+}
+
+/* Stage Icons gentle bob */
+@keyframes celebration-intro-icon-bob {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-6px) scale(1.05); }
+}
+
+/* Reveal Text */
+@keyframes celebration-intro-reveal-text {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loader bounce */
+@keyframes celebration-intro-loader-bounce {
+  0% { transform: translateY(0); opacity: 0.6; }
+  100% { transform: translateY(-8px); opacity: 1; }
+}
+
+/* Particle rise */
+@keyframes celebration-intro-particle-rise {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-120px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Music Disc Spin */
+@keyframes celebration-intro-music-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   10. Responsive Design
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .celebration-intro-main {
+    padding: 2rem 0.85rem 2.5rem;
+  }
+
+  .celebration-intro-card {
+    padding: 34px 18px 28px;
+    border-radius: 6px;
+  }
+
+  .celebration-intro-tape {
+    width: 110px;
+    height: 28px;
+    top: -14px;
+  }
+
+  .celebration-intro-gift-img {
+    width: 220px;
+  }
+
+  .celebration-intro-gift-shadow {
+    width: 140px;
+    height: 18px;
+  }
+
+  .celebration-intro-heading {
+    font-size: 2.15rem;
+    margin: 8px 0 10px;
+  }
+
+  .celebration-intro-message {
+    font-size: 1.1rem;
+    margin-bottom: 22px;
+  }
+
+  .celebration-intro-btn {
+    font-size: 0.86rem;
+    padding: 14px 22px;
+    min-height: 48px;
+    letter-spacing: 1px;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .celebration-intro-stage-heading {
+    font-size: 2.25rem;
+  }
+
+  .celebration-intro-stage-subtext {
+    font-size: 1.3rem;
+  }
+
+  .celebration-intro-music-player {
+    top: 14px;
+    left: 14px;
+  }
+
+  .celebration-intro-music-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .celebration-intro-music-tooltip {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11. Accessibility: prefers-reduced-motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .celebration-intro-gift-img,
+  .celebration-intro-gift-shadow,
+  .celebration-intro-doodle,
+  .celebration-intro-stage-icon,
+  .celebration-intro-music-disc {
+    animation: none !important;
+  }
+}
