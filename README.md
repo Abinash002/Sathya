@@ -1,2 +1,2 @@
 # Sathya
-Personal birthday siite for sathya hi byeee
+Personal birthday siite for sathya hi
