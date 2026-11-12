@@ -13,3 +13,4 @@ if ($Foreground) {
     $ms = [Math]::Max(1, $DebounceSeconds) * 1000
     & node (Join-Path $ScriptDir "sync-cli.js") "start" "--debounce=$ms"
 }
+

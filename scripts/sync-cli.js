@@ -172,3 +172,4 @@ if (command === 'start') {
   console.log('Usage: node scripts/sync-cli.js [start|stop|status]');
   process.exit(1);
 }
+
