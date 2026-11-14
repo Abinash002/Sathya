@@ -662,3 +662,116 @@ html, body {
     transform: translate(-50%, 0) translateY(-84%) !important;
   }
 }
+
+/* ==========================================================================
+   10. Floral Reveal Animation Overlay (90-Degree Overhead Flower Heads)
+   ========================================================================== */
+.envelope-floral-carpet-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+  background: radial-gradient(circle at center, rgba(255, 248, 235, 0.55) 0%, rgba(139, 13, 17, 0.4) 100%);
+}
+
+.envelope-floral-carpet-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.envelope-floral-carpet-overlay.is-fading-out {
+  opacity: 0;
+  transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.envelope-floral-carpet-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Individual Overhead Flower Head in the Floral Carpet */
+.floral-carpet-item {
+  position: absolute;
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) rotate(var(--start-rot, -35deg)) scale(0);
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 6px 14px rgba(35, 10, 12, 0.32));
+}
+
+.floral-carpet-item.is-bloomed {
+  animation: floral-carpet-bloom var(--bloom-dur, 0.75s) cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--bloom-delay, 0s);
+}
+
+.floral-carpet-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@keyframes floral-carpet-bloom {
+  0% {
+    transform: translate(-50%, -50%) rotate(var(--start-rot, -35deg)) scale(0);
+    opacity: 0;
+  }
+  65% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(calc(var(--final-rot, 0deg) + 6deg)) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--final-rot, 0deg)) scale(1);
+  }
+}
+
+/* Golden Ambient Sparkles across the blooming carpet */
+.envelope-floral-sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.floral-carpet-sparkle {
+  position: absolute;
+  font-size: 1.3rem;
+  color: #ffd770;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  animation: floral-sparkle-twinkle 1.8s ease-in-out infinite alternate;
+  filter: drop-shadow(0 2px 6px rgba(45, 15, 10, 0.45));
+}
+
+@keyframes floral-sparkle-twinkle {
+  0% {
+    opacity: 0.2;
+    transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.25) rotate(45deg);
+  }
+  100% {
+    opacity: 0.35;
+    transform: translate(-50%, -50%) scale(0.85) rotate(90deg);
+  }
+}
