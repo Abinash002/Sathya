@@ -211,10 +211,11 @@
 
   /**
    * Continue to next section:
-   * 1. Animates the letter gently out of view
-   * 2. Fires the custom JavaScript event 'birthday:open-gift'
-   * 3. Waits approximately 700ms for smooth fade-out
-   * 4. Navigates to Section 02 (secret code.html)
+   * 1. Triggers full-screen 90-degree overhead Floral Carpet Reveal
+   * 2. Animates the letter gently out of view
+   * 3. Fires the custom JavaScript event 'birthday:open-gift'
+   * 4. Waits 2.6 seconds (fulfilling the 2–3 second floral blooming animation duration)
+   * 5. Navigates smoothly to Section 02 (secret code.html)
    */
   function continueToGift(e) {
     if (e) {
@@ -225,7 +226,17 @@
     if (isExited) return;
     isExited = true;
 
-    // Visual exit transition (0.7s smooth fade-out in envelope.css)
+    // Trigger full-screen 90-degree overhead floral carpet reveal from button center
+    let originX = window.innerWidth / 2;
+    let originY = window.innerHeight / 2;
+    if (openGiftBtn) {
+      const rect = openGiftBtn.getBoundingClientRect();
+      originX = rect.left + rect.width / 2;
+      originY = rect.top + rect.height / 2;
+    }
+    triggerFloralReveal(originX, originY);
+
+    // Visual exit transition for the envelope card
     container.classList.add('is-exiting');
     container.setAttribute('data-state', 'exited');
 
@@ -249,11 +260,11 @@
 
     console.log('[Birthday Website] Custom event fired: "birthday:open-gift"', eventDetail);
 
-    // Wait 700ms for smooth fade-out animation, then navigate to Section 02
+    // Keep the 2–3 second animation duration before navigating to Section 02 (secret code.html)
     setTimeout(function () {
       const isSubfolder = window.location.pathname.includes('/sections/envelope/');
       window.location.href = isSubfolder ? '../../secret%20code.html' : 'secret%20code.html';
-    }, 700);
+    }, 2600);
   }
 
   /* --------------------------------------------------------------------------
