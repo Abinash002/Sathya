@@ -719,9 +719,9 @@
       transitionStage(stageCut, stageSlice, () => {
         triggerConfettiBurst(60);
 
-        // Automatic Timed Navigation to Section 06: Beautiful Memories after ~3.5 seconds
+        // Automatic Timed Navigation to Three Little Letters (birthday letter.html) after ~3.5 seconds
         setTimeout(() => {
-          navigateToMemories();
+          navigateToLetters();
         }, 3500);
       });
     }, 1800);
@@ -824,15 +824,15 @@
   }
 
   /* --------------------------------------------------------------------------
-     6. Stage Transitions (Candles -> Cut -> Slice -> Memories Navigation)
+     6. Stage Transitions (Candles -> Cut -> Slice -> Three Little Letters Navigation)
      -------------------------------------------------------------------------- */
-  let hasNavigatedToMemories = false;
+  let hasNavigatedToLetters = false;
 
-  function navigateToMemories() {
-    if (hasNavigatedToMemories) return;
-    hasNavigatedToMemories = true;
+  function navigateToLetters() {
+    if (hasNavigatedToLetters) return;
+    hasNavigatedToLetters = true;
 
-    console.log('[Birthday Cake] Automatically navigating to Section 06: beautiful memories.html');
+    console.log('[Birthday Cake] Automatically navigating to Three Little Letters: birthday letter.html');
 
     // Preserve music playback state & position in sessionStorage
     if (musicAudio && !musicAudio.paused) {
@@ -846,11 +846,14 @@
       cardElement.classList.add('birthday-cake-is-exiting');
     }
 
-    // Navigate to Section 06: beautiful memories.html after smooth fade
+    // Navigate directly to Three Little Letters: birthday letter.html after smooth fade
     setTimeout(() => {
-      window.location.href = 'beautiful%20memories.html';
+      window.location.href = 'birthday%20letter.html';
     }, 750);
   }
+
+  // Alias for backward compatibility
+  const navigateToMemories = navigateToLetters;
 
   function transitionStage(fromEl, toEl, onComplete) {
     if (fromEl) {
