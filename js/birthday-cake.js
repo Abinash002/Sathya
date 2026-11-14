@@ -934,7 +934,7 @@
         transitionStage(stageCut, stageSlice, () => {
           triggerConfettiBurst(55);
           setTimeout(() => {
-            navigateToMemories();
+            navigateToLetters();
           }, 3500);
         });
       });
@@ -944,7 +944,7 @@
     if (finalContinueBtn) {
       finalContinueBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        navigateToMemories();
+        navigateToLetters();
       });
     }
   }
@@ -968,7 +968,8 @@
   window.BirthdayCakeSection = {
     extinguishAll: blowAllCandlesStaggered,
     cutCake: executeCakeCut,
-    navigateToMemories: navigateToMemories,
+    navigateToLetters: navigateToLetters,
+    navigateToMemories: navigateToLetters,
     isAllBlown: () => allCandlesBlown,
     isCut: () => isCakeCut
   };
