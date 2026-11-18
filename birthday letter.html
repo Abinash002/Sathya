@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,10 +17,13 @@
   <!-- Google Fonts: Romantic handwriting & warm classic serif/display -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Dancing+Script:wght@600;700&family=Marck+Script&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Dancing+Script:wght@600;700&family=Marck+Script&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="css/birthday-letter.css">
 </head>
+
 <body class="birthday-letter-body">
 
   <!-- Ambient Scrapbook Floating Particles -->
@@ -35,13 +39,8 @@
 
   <!-- Reusable Fixed Top-Left Background Music Player -->
   <aside class="birthday-letter-music-player" id="birthday-letter-music-player" aria-label="Background music controls">
-    <button 
-      type="button" 
-      class="birthday-letter-music-btn" 
-      id="birthday-letter-music-btn" 
-      aria-label="Toggle background music"
-      aria-pressed="false"
-    >
+    <button type="button" class="birthday-letter-music-btn" id="birthday-letter-music-btn"
+      aria-label="Toggle background music" aria-pressed="false">
       <div class="birthday-letter-music-disc" aria-hidden="true">
         <span class="birthday-letter-music-note">♪</span>
       </div>
@@ -68,7 +67,7 @@
 
       <!-- ================= SECTION A: OPENING SCREEN (THREE ENVELOPES) ================= -->
       <section class="birthday-letter-hub" id="birthday-letter-hub" aria-labelledby="birthday-letter-main-heading">
-        
+
         <!-- Header Card -->
         <header class="birthday-letter-header-card">
           <!-- Washi Tape Accent -->
@@ -85,78 +84,52 @@
         </header>
 
         <!-- Envelopes Presentation Grid -->
-        <div class="birthday-letter-envelopes-grid" id="birthday-letter-envelopes-grid" role="region" aria-label="Interactive Envelopes">
+        <div class="birthday-letter-envelopes-grid" id="birthday-letter-envelopes-grid" role="region"
+          aria-label="Interactive Envelopes">
 
           <!-- ENVELOPE 01: A Little Note -->
-          <article 
-            class="birthday-letter-envelope-wrap envelope-active" 
-            id="envelope-wrap-1"
-            tabindex="0"
-            role="button"
-            aria-label="Open Letter 01: 01 — A Little Note"
-          >
+          <article class="birthday-letter-envelope-wrap envelope-active" id="envelope-wrap-1" tabindex="0" role="button"
+            aria-label="Open Letter 01: 01 — A Little Note">
             <div class="birthday-letter-envelope-card envelope-tilt-left" id="envelope-card-1">
               <div class="birthday-letter-tape birthday-letter-tape-card" aria-hidden="true"></div>
               <div class="birthday-letter-env-img-wrap">
-                <img 
-                  src="assets/characters/envelope-01.webp" 
-                  alt="Envelope 01 — A Little Note" 
-                  class="birthday-letter-env-img"
-                  loading="lazy"
-                />
+                <img src="assets/characters/envelope-01.webp" alt="Envelope 01 — A Little Note"
+                  class="birthday-letter-env-img" loading="lazy" />
               </div>
               <div class="birthday-letter-env-label-wrap">
-                <h3 class="birthday-letter-env-label">01 — A Little Note</h3>
+                <h3 class="birthday-letter-env-label"></h3>
                 <span class="birthday-letter-env-prompt">Tap to Open ✨</span>
               </div>
             </div>
           </article>
 
           <!-- ENVELOPE 02: A Little Poetry -->
-          <article 
-            class="birthday-letter-envelope-wrap" 
-            id="envelope-wrap-2"
-            tabindex="0"
-            role="button"
-            aria-label="Open Letter 02: 02 — A Little Poetry"
-          >
+          <article class="birthday-letter-envelope-wrap" id="envelope-wrap-2" tabindex="0" role="button"
+            aria-label="Open Letter 02: 02 — A Little Poetry">
             <div class="birthday-letter-envelope-card envelope-tilt-center" id="envelope-card-2">
               <div class="birthday-letter-tape birthday-letter-tape-card" aria-hidden="true"></div>
               <div class="birthday-letter-env-img-wrap">
-                <img 
-                  src="assets/characters/envelope-02.webp" 
-                  alt="Envelope 02 — A Little Poetry" 
-                  class="birthday-letter-env-img"
-                  loading="lazy"
-                />
+                <img src="assets/characters/envelope-02.webp" alt="Envelope 02 — A Little Poetry"
+                  class="birthday-letter-env-img" loading="lazy" />
               </div>
               <div class="birthday-letter-env-label-wrap">
-                <h3 class="birthday-letter-env-label">02 — A Little Poetry</h3>
+                <h3 class="birthday-letter-env-label"></h3>
                 <span class="birthday-letter-env-prompt">Tap to Open ✨</span>
               </div>
             </div>
           </article>
 
           <!-- ENVELOPE 03: A Secret Message -->
-          <article 
-            class="birthday-letter-envelope-wrap" 
-            id="envelope-wrap-3"
-            tabindex="0"
-            role="button"
-            aria-label="Open Letter 03: 03 — A Secret Message"
-          >
+          <article class="birthday-letter-envelope-wrap" id="envelope-wrap-3" tabindex="0" role="button"
+            aria-label="Open Letter 03: 03 — A Secret Message">
             <div class="birthday-letter-envelope-card envelope-tilt-right" id="envelope-card-3">
               <div class="birthday-letter-tape birthday-letter-tape-card" aria-hidden="true"></div>
               <div class="birthday-letter-env-img-wrap">
-                <img 
-                  src="assets/characters/envelope-03.webp" 
-                  alt="Envelope 03 — A Secret Message" 
-                  class="birthday-letter-env-img"
-                  loading="lazy"
-                />
+                <img src="assets/characters/envelope-03.webp" alt="Envelope 03 — A Secret Message"
+                  class="birthday-letter-env-img" loading="lazy" />
               </div>
               <div class="birthday-letter-env-label-wrap">
-                <h3 class="birthday-letter-env-label">03 — A Secret Message</h3>
+                <h3 class="birthday-letter-env-label"></h3>
                 <span class="birthday-letter-env-prompt">Tap to Open ✨</span>
               </div>
             </div>
@@ -168,49 +141,37 @@
 
 
       <!-- ================= SECTION B: MODAL OVERLAY FOR ACTIVE LETTER ================= -->
-      <div 
-        class="birthday-letter-modal-backdrop" 
-        id="birthday-letter-modal" 
-        role="dialog" 
-        aria-modal="true" 
-        aria-hidden="true"
-      >
+      <div class="birthday-letter-modal-backdrop" id="birthday-letter-modal" role="dialog" aria-modal="true"
+        aria-hidden="true">
         <div class="birthday-letter-modal-container">
-          
+
           <!-- Close / Back Button -->
-          <button 
-            type="button" 
-            class="birthday-letter-close-btn" 
-            id="birthday-letter-close-btn"
-            aria-label="Close letter and return to envelopes"
-          >
+          <button type="button" class="birthday-letter-close-btn" id="birthday-letter-close-btn"
+            aria-label="Close letter and return to envelopes">
             ✕
           </button>
 
           <!-- ================= LETTER 01 CONTENT ================= -->
           <article class="birthday-letter-sheet letter-sheet-1" id="letter-sheet-1" aria-labelledby="letter-1-title">
             <div class="birthday-letter-tape birthday-letter-tape-sheet" aria-hidden="true"></div>
-            
+
             <div class="birthday-letter-sheet-badge">LETTER 01 OF 03</div>
-            
+
             <h2 class="birthday-letter-sheet-title" id="letter-1-title">A Little Note</h2>
             <div class="birthday-letter-flourish flourish-small" aria-hidden="true"></div>
 
             <div class="birthday-letter-note-body">
               <p class="birthday-letter-salutation">Hey, birthday girl! ♡</p>
               <p class="birthday-letter-paragraph">
-                Just a little reminder that you are precious, your smile is beautiful, and you deserve all the happiness in this world.
+                Just a little reminder that you are precious, your smile is beautiful, and you deserve all the happiness
+                in this world.
               </p>
               <div class="birthday-letter-note-bottom-heart" aria-hidden="true">♡</div>
             </div>
 
             <div class="birthday-letter-actions">
-              <button 
-                type="button" 
-                class="birthday-letter-btn birthday-letter-btn-primary" 
-                id="btn-next-letter-1"
-                aria-label="Close this note and open the next letter"
-              >
+              <button type="button" class="birthday-letter-btn birthday-letter-btn-primary" id="btn-next-letter-1"
+                aria-label="Close this note and open the next letter">
                 <span>NEXT LETTER →</span>
               </button>
             </div>
@@ -220,7 +181,7 @@
           <!-- ================= LETTER 02 CONTENT ================= -->
           <article class="birthday-letter-sheet letter-sheet-2" id="letter-sheet-2" aria-labelledby="letter-2-title">
             <div class="birthday-letter-tape birthday-letter-tape-sheet tape-botanical" aria-hidden="true"></div>
-            
+
             <div class="birthday-letter-sheet-badge">LETTER 02 OF 03</div>
 
             <h2 class="birthday-letter-sheet-title" id="letter-2-title">For You, Always</h2>
@@ -241,12 +202,8 @@
             </div>
 
             <div class="birthday-letter-actions">
-              <button 
-                type="button" 
-                class="birthday-letter-btn birthday-letter-btn-primary" 
-                id="btn-next-letter-2"
-                aria-label="Close poetry card and open the last letter"
-              >
+              <button type="button" class="birthday-letter-btn birthday-letter-btn-primary" id="btn-next-letter-2"
+                aria-label="Close poetry card and open the last letter">
                 <span>OPEN THE LAST LETTER →</span>
               </button>
             </div>
@@ -256,8 +213,8 @@
           <!-- ================= LETTER 03 CONTENT ================= -->
           <article class="birthday-letter-sheet letter-sheet-3" id="letter-sheet-3" aria-labelledby="letter-3-title">
             <div class="birthday-letter-tape birthday-letter-tape-sheet tape-gold" aria-hidden="true"></div>
-            
-            <div class="birthday-letter-sheet-badge badge-secret">LETTER 03 • SECRET MESSAGE</div>
+
+            <div class="birthday-letter-sheet-badge badge-secret"></div>
 
             <h2 class="birthday-letter-sheet-title secret-title" id="letter-3-title">
               ONE LAST LITTLE SECRET...
@@ -290,18 +247,14 @@
               <div class="birthday-letter-waiting-wrap" id="birthday-letter-waiting-wrap">
                 <span class="birthday-letter-waiting-sparkle" aria-hidden="true">✨</span>
                 <p class="birthday-letter-waiting-text">
-                  There's someone who has been waiting for you... 🤍
+                  There's someone who has been waiting for you... 🤍👇🏻
                 </p>
               </div>
 
               <!-- Prominent Final Surprise Button -->
               <div class="birthday-letter-final-action">
-                <button 
-                  type="button" 
-                  class="birthday-letter-btn birthday-letter-btn-surprise" 
-                  id="btn-reveal-surprise" 
-                  aria-label="Reveal final birthday video surprise"
-                >
+                <button type="button" class="birthday-letter-btn birthday-letter-btn-surprise" id="btn-reveal-surprise"
+                  aria-label="Reveal final birthday video surprise">
                   <span class="surprise-btn-sparkle" aria-hidden="true">🌻</span>
                   <span class="surprise-btn-text">SOMEONE HAS BEEN WAITING FOR YOU...</span>
                   <span class="surprise-btn-sparkle" aria-hidden="true">✨</span>
@@ -315,9 +268,10 @@
       </div><!-- /#birthday-letter-modal -->
 
 
-            <!-- ================= SECTION C: FINAL VIDEO SURPRISE ================= -->
-      <section class="birthday-letter-video-stage" id="birthday-letter-video-stage" aria-label="Final Video Surprise" aria-hidden="true">
-        
+      <!-- ================= SECTION C: FINAL VIDEO SURPRISE ================= -->
+      <section class="birthday-letter-video-stage" id="birthday-letter-video-stage" aria-label="Final Video Surprise"
+        aria-hidden="true">
+
         <div class="birthday-letter-video-polaroid" id="birthday-letter-video-polaroid">
           <!-- Washi Tape Accent -->
           <div class="birthday-letter-tape birthday-letter-tape-video" aria-hidden="true"></div>
@@ -329,14 +283,8 @@
 
           <!-- Polaroid Video Frame -->
           <div class="birthday-letter-video-frame">
-            <video 
-              id="birthday-letter-video" 
-              class="birthday-letter-video-player"
-              playsinline 
-              controls 
-              preload="metadata"
-              poster="assets/characters/standing-cats.webp"
-            >
+            <video id="birthday-letter-video" class="birthday-letter-video-player" playsinline controls
+              preload="metadata" poster="assets/characters/standing-cats.webp">
               <source src="assets/videos/sathya-birthday-surprise.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -344,12 +292,8 @@
             <!-- Video Fallback / Friendly Placeholder notice if video not present -->
             <div class="birthday-letter-video-placeholder" id="birthday-letter-video-placeholder">
               <div class="placeholder-icon-wrap">
-                <img 
-                  src="assets/characters/kitten.webp" 
-                  alt="Fluffy birthday kitten" 
-                  class="placeholder-kitten-img"
-                  onerror="this.src='assets/characters/standing-cats.webp';"
-                />
+                <img src="assets/characters/kitten.webp" alt="Fluffy birthday kitten" class="placeholder-kitten-img"
+                  onerror="this.src='assets/characters/standing-cats.webp';" />
                 <span class="placeholder-sunflower-badge">🌻</span>
               </div>
               <p class="placeholder-text-main">
@@ -366,22 +310,14 @@
             <p class="birthday-letter-video-message" id="birthday-letter-video-message">
               Hope this made you smile, Sathya! 🤍
             </p>
-            
+
             <div class="birthday-letter-video-controls-row">
-              <button 
-                type="button" 
-                class="birthday-letter-btn birthday-letter-btn-replay" 
-                id="btn-replay-video"
-                aria-label="Replay the birthday surprise video"
-              >
+              <button type="button" class="birthday-letter-btn birthday-letter-btn-replay" id="btn-replay-video"
+                aria-label="Replay the birthday surprise video">
                 <span>↺ WATCH AGAIN</span>
               </button>
-              <button 
-                type="button" 
-                class="birthday-letter-btn birthday-letter-btn-secondary" 
-                id="btn-back-to-letters"
-                aria-label="Read the three letters again"
-              >
+              <button type="button" class="birthday-letter-btn birthday-letter-btn-secondary" id="btn-back-to-letters"
+                aria-label="Read the three letters again">
                 <span>💌 READ LETTERS AGAIN</span>
               </button>
             </div>
@@ -396,4 +332,5 @@
 
   <script src="js/birthday-letter.js"></script>
 </body>
+
 </html>
